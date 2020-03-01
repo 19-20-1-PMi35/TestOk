@@ -1,7 +1,0 @@
-C:\Users\Tapac\source\repos\TestOk\DataAccess\bin\Debug\netstandard2.1\DataAccess.deps.json
-C:\Users\Tapac\source\repos\TestOk\DataAccess\bin\Debug\netstandard2.1\DataAccess.dll
-C:\Users\Tapac\source\repos\TestOk\DataAccess\bin\Debug\netstandard2.1\DataAccess.pdb
-C:\Users\Tapac\source\repos\TestOk\DataAccess\obj\Debug\netstandard2.1\DataAccess.AssemblyInfoInputs.cache
-C:\Users\Tapac\source\repos\TestOk\DataAccess\obj\Debug\netstandard2.1\DataAccess.AssemblyInfo.cs
-C:\Users\Tapac\source\repos\TestOk\DataAccess\obj\Debug\netstandard2.1\DataAccess.dll
-C:\Users\Tapac\source\repos\TestOk\DataAccess\obj\Debug\netstandard2.1\DataAccess.pdb
