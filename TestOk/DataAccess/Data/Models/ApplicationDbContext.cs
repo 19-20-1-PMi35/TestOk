@@ -16,5 +16,9 @@ namespace DataAccess.Data.Models
             : base(options)
         {
         }
+
+        public ApplicationDbContext()
+        {
+        }
     }
 }
