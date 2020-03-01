@@ -2,25 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <UserSecretsId>aspnet-TestOk-71685C78-013B-48F4-A573-20F20C244CE8</UserSecretsId>
+    <UserSecretsId>aspnet-TestOk-E8EA4BAA-E68F-4047-8E85-A283352BE94B</UserSecretsId>
   </PropertyGroup>
 
 
   <ItemGroup>
-    <PackageReference Include="Castle.Windsor" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.2" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj" />
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
   </ItemGroup>
 

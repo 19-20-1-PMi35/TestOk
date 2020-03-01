@@ -1,7 +1,7 @@
-D:\Lviv National University\6 семестр\Програмна інженерія\TestOk\DataAccess\bin\Debug\netstandard2.1\DataAccess.deps.json
-D:\Lviv National University\6 семестр\Програмна інженерія\TestOk\DataAccess\bin\Debug\netstandard2.1\DataAccess.dll
-D:\Lviv National University\6 семестр\Програмна інженерія\TestOk\DataAccess\obj\Debug\netstandard2.1\DataAccess.AssemblyInfoInputs.cache
-D:\Lviv National University\6 семестр\Програмна інженерія\TestOk\DataAccess\obj\Debug\netstandard2.1\DataAccess.AssemblyInfo.cs
-D:\Lviv National University\6 семестр\Програмна інженерія\TestOk\DataAccess\bin\Debug\netstandard2.1\DataAccess.pdb
-D:\Lviv National University\6 семестр\Програмна інженерія\TestOk\DataAccess\obj\Debug\netstandard2.1\DataAccess.dll
-D:\Lviv National University\6 семестр\Програмна інженерія\TestOk\DataAccess\obj\Debug\netstandard2.1\DataAccess.pdb
+C:\Users\Tapac\source\repos\TestOk\DataAccess\bin\Debug\netstandard2.1\DataAccess.deps.json
+C:\Users\Tapac\source\repos\TestOk\DataAccess\bin\Debug\netstandard2.1\DataAccess.dll
+C:\Users\Tapac\source\repos\TestOk\DataAccess\bin\Debug\netstandard2.1\DataAccess.pdb
+C:\Users\Tapac\source\repos\TestOk\DataAccess\obj\Debug\netstandard2.1\DataAccess.AssemblyInfoInputs.cache
+C:\Users\Tapac\source\repos\TestOk\DataAccess\obj\Debug\netstandard2.1\DataAccess.AssemblyInfo.cs
+C:\Users\Tapac\source\repos\TestOk\DataAccess\obj\Debug\netstandard2.1\DataAccess.dll
+C:\Users\Tapac\source\repos\TestOk\DataAccess\obj\Debug\netstandard2.1\DataAccess.pdb
