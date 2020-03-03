@@ -1,0 +1,17 @@
+﻿#testsButton {
+    position: absolute;
+    width: fit-content;
+}
+.tests-container {
+    display: none;
+    margin: 0;
+    background-color: white;
+    width: max-content;
+    -webkit-box-shadow: -4px 3px 7px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: -4px 3px 7px -2px rgba(0,0,0,0.75);
+    box-shadow: -4px 3px 7px -2px rgba(0,0,0,0.75);
+}
+.test-item {
+    margin: 5px;
+    margin-right: 10px;
+}
