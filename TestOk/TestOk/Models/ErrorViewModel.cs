@@ -2,7 +2,7 @@ using System;
 
 namespace TestOk.Models
 {
-    public class ErrorViewModel
+    public class ErrorViewModel: IBasicModel
     {
         public string RequestId { get; set; }
 

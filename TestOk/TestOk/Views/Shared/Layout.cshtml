@@ -32,9 +32,12 @@
                             <div class="col-10" id="testsButton">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="">Tests</a>
                                 <div class="tests-container">
-                                    <div class="test-item">Math</div>
-                                    <div class="test-item">Algebra</div>
-                                    <div class="test-item">Detosososososoososos</div>
+                                    @foreach (var el in @ViewBag.Subjects)
+                                    {
+                                        <div class="test-item">
+                                            <span id="item-text">@el</span>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </li>

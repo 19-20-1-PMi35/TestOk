@@ -1,5 +1,3 @@
-ENV ASPNETCORE_URLS http://+:80
-
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
@@ -21,4 +19,5 @@ RUN dotnet publish "TestOk.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+ENV ASPNETCORE_URLS http://+:80
 ENTRYPOINT ["dotnet", "TestOk.dll"]

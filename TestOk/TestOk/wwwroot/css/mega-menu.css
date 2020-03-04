@@ -11,7 +11,7 @@
     -moz-box-shadow: -4px 3px 7px -2px rgba(0,0,0,0.75);
     box-shadow: -4px 3px 7px -2px rgba(0,0,0,0.75);
 }
-.test-item {
-    margin: 5px;
-    margin-right: 10px;
+#item-text {
+    margin-left: 5px;
+    margin-right: 5px;
 }

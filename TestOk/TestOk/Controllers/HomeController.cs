@@ -9,7 +9,7 @@ using TestOk.Models;
 
 namespace TestOk.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : SharedController
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -26,6 +26,12 @@ namespace TestOk.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult Layout()
+        {
+            var megaMenuModel = new LayoutViewModel { Subjects = new List<string> { "heeelloog", "asss" } };
+            return View(megaMenuModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
