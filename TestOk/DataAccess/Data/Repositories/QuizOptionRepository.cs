@@ -6,25 +6,30 @@ namespace DataAccess.Repositories
 {
     public class QuizOptionRepository : IQuizOptionRepository
     {
+        private readonly DbContextFactory _dbContextFactory;
+        public QuizOptionRepository(DbContextFactory dbContextFactory)
+        {
+            _dbContextFactory = dbContextFactory;
+        }
+
         public bool CreateQuizOption(QuizOptionDto quizOptionDto)
         {
-            using (var dbContext = new ApplicationDbContext())
+            using var dbContext = _dbContextFactory.GetDbContext();
+
+            try
             {
-                try
+                dbContext.QuizOptions.Add(new QuizOption
                 {
-                    dbContext.QuizOptions.Add(new QuizOption
-                    {
-                        Text = quizOptionDto.Text
-                    });
+                    Text = quizOptionDto.Text
+                });
 
-                    dbContext.SaveChanges();
+                dbContext.SaveChanges();
 
-                    return true;
-                }
-                catch
-                {
-                    return false;
-                }
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
     }
