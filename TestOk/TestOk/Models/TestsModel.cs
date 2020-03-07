@@ -23,24 +23,31 @@ namespace TestOk.Models
             }
         };
 
+        private static TestDto test = new TestDto
+        {
+            Subject = "Programming",
+            MinimumSuccessPercentage = 51,
+            Quizes = new List<QuizDto>
+            {
+                new QuizDto
+                {
+                    Options = QuizOptionDtos,
+                    Complexity = 25,
+                    Question = "hello world ?"
+                }
+            },
+            MaxGrade = 144
+        };
+
         public List<TestDto> Tests = new List<TestDto>
         {
-            new TestDto
-            {
-                Subject = "Programming",
-                MinimumSuccessPercentage = 25,
-                Quizes = new List<QuizDto>
-                {
-                  new QuizDto
-                  {
-                      Options = QuizOptionDtos,
-                      Complexity = 25,
-                      Question = "hello world ?"
-                  }
-                },
-                MaxGrade = 150
-            }
+            test, test, test, test, test, test
         };
+
+        public int GetMinPoints(TestDto test)
+        {
+            return (int)(test.MaxGrade * ((float)test.MinimumSuccessPercentage / 100));
+        }
 
         public TestsModel()
         {
