@@ -8,8 +8,11 @@ namespace DataAccess.Data.Models
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+        public DbSet<Test> Tests { get; set; }
+        public DbSet<Quiz> Quizes { get; set; }
+        public DbSet<QuizOption> QuizOptions { get; set; }
+
+        public ApplicationDbContext(DbContextOptions options): base(options)
         {
         }
     }

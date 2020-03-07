@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogic;
+using BusinessLogic.Services;
+using DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -12,6 +15,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DataAccess.Data.Models;
+using DataAccess.Repositories;
+using DataAccess.Repositories.Interfaces;
 
 namespace TestOk
 {
@@ -32,8 +37,16 @@ namespace TestOk
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddSingleton<DbContextFactory>();
+
+            services.AddTransient<IQuizOptionRepository, QuizOptionRepository>();
+            services.AddTransient<IQuizRepository, QuizRepository>();
+            services.AddTransient<ITestRepository, TestRepository>();
+            services.AddTransient<ITestService, TestService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
