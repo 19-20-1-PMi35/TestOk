@@ -31,10 +31,17 @@ namespace TestOk.Controllers
             return View();
         }
 
-        public IActionResult Layout()
+        [Route("Tests/{subject}")]
+        public IActionResult Tests(string subject)
         {
-            var megaMenuModel = new LayoutViewModel { Subjects = new List<string> { "heeelloog", "asss" } };
-            return View(megaMenuModel);
+            return View(new TestsModel(subject));
+        }
+
+        [Route("Tests")]
+        public IActionResult Tests()
+        {
+            return View(new TestsModel());
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

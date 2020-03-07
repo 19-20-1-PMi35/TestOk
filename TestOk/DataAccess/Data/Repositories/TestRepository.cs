@@ -60,7 +60,6 @@ namespace DataAccess.Repositories
 
            try
            {
-
                return dbContext.Tests.GroupBy(t => t.Subject).Select(t => new CountedSubjectDto
                {
                    Subject = t.Key,

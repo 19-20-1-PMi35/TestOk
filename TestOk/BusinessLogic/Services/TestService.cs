@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DataAccess.Data.DTO;
 
 namespace BusinessLogic.Services
 {
@@ -15,12 +16,9 @@ namespace BusinessLogic.Services
             _testRepository = testRepository;
         }
 
-        public List<string> GetFormattedTestSubjects()
+        public List<CountedSubjectDto> GetCountedTestSubjects()
         {
-            var countedSubjects = _testRepository.GetCountedSubjects();
-
-            return countedSubjects.Select(s => $"{s.Subject} ({s.Count})").ToList();
+            return _testRepository.GetCountedSubjects();
         }
-
     }
 }

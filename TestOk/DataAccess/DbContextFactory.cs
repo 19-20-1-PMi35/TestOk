@@ -35,10 +35,7 @@ namespace DataAccess
             var path = Path.Combine(Environment.CurrentDirectory, "appsettings.json");
             configurationBuilder.AddJsonFile(path, false);
 
-
-
             var root = configurationBuilder.Build();
-
             return root.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value;
         }
     }
