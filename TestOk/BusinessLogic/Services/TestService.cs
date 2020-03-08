@@ -24,5 +24,10 @@ namespace BusinessLogic.Services
         {
             return await _testRepository.GetTestsList(subject);
         }
+
+        public bool SaveTest(TestDto testDto)
+        {
+            return _testRepository.SaveTest(testDto);
+        }
     }
 }

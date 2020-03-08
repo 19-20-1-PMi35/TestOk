@@ -7,7 +7,7 @@ namespace DataAccess.Repositories.Interfaces
 {
     public interface ITestRepository
     {
-        bool CreateTest(TestDto testDto);
+        bool SaveTest(TestDto testDto);
 
         List<CountedSubjectDto> GetCountedSubjects();
 

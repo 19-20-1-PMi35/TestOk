@@ -8,7 +8,7 @@ namespace DataAccess.Data.Models
 
         public int MaxGrade { get; set; }
 
-        public List<Quiz> Quizes { get; set; }
+        public List<Quiz> Quizes { get; set; } = new List<Quiz>();
 
         public string Subject { get; set; }
 

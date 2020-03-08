@@ -1,5 +1,4 @@
-﻿using DataAccess.Data.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace DataAccess.DTO
 {
@@ -9,7 +8,7 @@ namespace DataAccess.DTO
 
         public int MaxGrade { get; set; }
 
-        public List<QuizDto> Quizes { get; set; }
+        public List<QuizDto> Quizes { get; set; } = new List<QuizDto>();
 
         public string Subject { get; set; }
 

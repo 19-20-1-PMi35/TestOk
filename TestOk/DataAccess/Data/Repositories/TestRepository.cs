@@ -19,7 +19,7 @@ namespace DataAccess.Repositories
             _dbContextFactory = dbContextFactory;
         }
 
-        public bool CreateTest(TestDto testDto)
+        public bool SaveTest(TestDto testDto)
         {
             using var dbContext = _dbContextFactory.GetDbContext();
 
@@ -49,7 +49,7 @@ namespace DataAccess.Repositories
 
                 return true;
             }
-            catch
+            catch(Exception e)
             {
                 return false;
             }
