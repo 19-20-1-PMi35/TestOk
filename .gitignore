@@ -1,13 +1,4 @@
-*.cache
-*.pdb
-*.dll
-*.txt
-*.targets
-*.ide-shm
-*.ide-wal
-TestOk/DataAccess/bin/
-TestOk/DataAccess/Migrations
-TestOk/.vs
-TestOk/DataAccess/obj
-TestOk/TestOk/obj
-TestOk/BusinessLayer/obj/Debug/netstandard2.1/BusinessLayer.csproj.CopyComplete
+.vs
+bin
+obj
+/TestOk/TestOk/TestOk.csproj.user

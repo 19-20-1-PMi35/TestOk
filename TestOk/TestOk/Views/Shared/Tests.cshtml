@@ -1,0 +1,46 @@
+﻿@model TestsModel
+@{
+    ViewData["Title"] = "Available tests";
+}
+<h1>@ViewData["Title"]</h1>
+<p>@Model.Title</p>
+<div class="tests-page-container">
+    @foreach (var test in Model.Tests)
+    {
+        <div class="test-item-body">
+            <div class="flex-lg-row">
+                <strong class="flex-lg-row">@test.Subject.ToUpper()</strong>
+            </div>
+            <div class="row" style="height: 75%;">
+                <div class="col-8" style="height: 100%">
+                    <div class="flex-md-row min-text-size" >
+                        <span class="test-body-text text-justify" style="margin-bottom: 15px">
+                            In order to successfully pass this test
+                            You need to score at least
+                            <strong>
+                                @Model.GetMinPoints(test) of
+                            @test.MaxGrade points
+                        </strong>.
+                        Please, don`t use any forbidden things
+                        and don`t switch tabs in browser (you can actually,
+                        but in future we will BAN you for this :) )
+                        </span>
+                    </div>
+                    <div class="flex-md-row min-text-size">
+                        <strong>Minimum percentage to pass this test: @test.MinimumSuccessPercentage%</strong>
+                    </div>
+                </div>
+                <div class="col-4" style="height: 100%">
+                    <div class="row" style="height: 50%; align-content: flex-end">
+                        <strong class="text-justify test-btn-proceed">
+                            Maximum grade: @test.MaxGrade
+                        </strong>
+                    </div>
+                    <div class="row" style="height: 50%; align-content: center">
+                        <button type="button" class="btn btn-dark test-btn-proceed">Proceed</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
