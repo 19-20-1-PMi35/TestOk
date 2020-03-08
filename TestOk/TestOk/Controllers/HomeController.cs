@@ -32,16 +32,19 @@ namespace TestOk.Controllers
         }
 
         [Route("Tests/{subject}")]
-        public IActionResult Tests(string subject)
+        public async Task<IActionResult> Tests(string subject)
         {
-            return View(new TestsModel(subject));
+            var tests = await _testService.GetTestsList(subject);
+
+            return View(new TestsModel(subject, tests));
         }
 
         [Route("Tests")]
-        public IActionResult Tests()
+        public async Task<IActionResult> Tests()
         {
-            return View(new TestsModel());
+            var tests = await _testService.GetTestsList();
 
+            return View(new TestsModel(tests));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

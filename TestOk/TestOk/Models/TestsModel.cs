@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogic;
 using DataAccess.Data.Models;
 using DataAccess.DTO;
 
@@ -11,52 +12,23 @@ namespace TestOk.Models
     {
         public string Title;
 
-        public static List<QuizOptionDto> QuizOptionDtos = new List<QuizOptionDto>
-        {
-            new QuizOptionDto
-            {
-                Text = "First"
-            },
-            new QuizOptionDto
-            {
-                Text = "Second"
-            }
-        };
-
-        private static TestDto test = new TestDto
-        {
-            Subject = "Programming",
-            MinimumSuccessPercentage = 51,
-            Quizes = new List<QuizDto>
-            {
-                new QuizDto
-                {
-                    Options = QuizOptionDtos,
-                    Complexity = 25,
-                    Question = "hello world ?"
-                }
-            },
-            MaxGrade = 144
-        };
-
-        public List<TestDto> Tests = new List<TestDto>
-        {
-            test, test, test, test, test, test
-        };
+        public readonly List<TestDto> Tests;
 
         public int GetMinPoints(TestDto test)
         {
             return (int)(test.MaxGrade * ((float)test.MinimumSuccessPercentage / 100));
         }
 
-        public TestsModel()
+        public TestsModel(List<TestDto> tests)
         {
             Title = "Here is list of all available tests:";
+            Tests = tests;
         }
 
-        public TestsModel(string subject)
+        public TestsModel(string subject, List<TestDto> tests)
         {
             Title = $"Here is list of available tests for {subject}:";
+            Tests = tests;
         }
 
     }

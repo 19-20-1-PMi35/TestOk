@@ -1,9 +1,8 @@
 ﻿using DataAccess.Repositories.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 using DataAccess.Data.DTO;
+using DataAccess.DTO;
 
 namespace BusinessLogic.Services
 {
@@ -19,6 +18,11 @@ namespace BusinessLogic.Services
         public List<CountedSubjectDto> GetCountedTestSubjects()
         {
             return _testRepository.GetCountedSubjects();
+        }
+
+        public async Task<List<TestDto>> GetTestsList(string subject = null)
+        {
+            return await _testRepository.GetTestsList(subject);
         }
     }
 }
