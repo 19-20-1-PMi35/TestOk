@@ -24,11 +24,15 @@ namespace DataAccess.Data
 
         public static List<QuizOptionDto> ConvertToDto(this List<QuizOption> quizOptions)
         {
-            return quizOptions.Select(q => new QuizOptionDto
-            {
-                Id = q.Id,
-                Text = q.Text
-            }).ToList();
+            return new List<QuizOptionDto>();
+
+            //TODO: uncomment when Quizes have non-empty options
+
+            //return quizOptions.Select(q => new QuizOptionDto
+            //{
+            //    Id = q.Id,
+            //    Text = q.Text
+            //}).ToList();
         }
 
     }

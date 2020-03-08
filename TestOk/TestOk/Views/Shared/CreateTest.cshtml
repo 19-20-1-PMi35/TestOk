@@ -1,0 +1,73 @@
+﻿@model DataAccess.DTO.TestDto
+
+@{
+    ViewData["Title"] = "AddTest";
+}
+
+@using (@Html.BeginForm("", "SaveTest", FormMethod.Post))
+    {
+	<div class="row">
+		<div class="col-md-4">
+			<h2>New Test</h2>
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="MaxGrade" class="control-label"></label>
+				<input asp-for="MaxGrade" type="number" class="form-control" />
+				<span asp-validation-for="MaxGrade" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Subject" class="control-label"></label>
+				<input asp-for="Subject" class="form-control" />
+				<span asp-validation-for="Subject" class="text-danger"></span>
+			</div>
+	        <div class="form-group">
+		        <label asp-for="MinimumSuccessPercentage" class="control-label"></label>
+			    <input asp-for="MinimumSuccessPercentage" type="number"  class="form-control" />
+				<span asp-validation-for="MinimumSuccessPercentage" class="text-danger"></span>
+			</div>
+			<div>
+				<button type="submit" class="btn btn-primary">Save</button>
+				<button type="reset" class="btn btn-danger">Clear</button>
+			</div>
+		</div>
+
+		<div class="col-md-8">
+			<div id="quizes" class="text-center">
+				<h2>Quizes</h2>
+				<ul class="list-group mt-5">
+					@foreach (var quiz in Model.Quizes) { Html.RenderPartial("AddQuiz", quiz); }
+				</ul>
+			</div>
+			<div class="text-center">
+				<button id="addQuiz" class="btn btn-secondary">Add Quiz</button>
+			</div>
+		</div>
+
+	</div>
+}
+
+@section Scripts
+{
+	<script>
+		$("#addQuiz").on("click", function (event) {
+			event.preventDefault();
+
+			$.ajax({
+                async: false,
+                url: '/CreateQuiz',
+				success: function (partialView) {
+					$('#quizes').append(partialView);
+				}
+			})			
+		});
+	</script>
+
+	<script>
+		$(document).on("click", "button.deleteQuiz", function(){
+			$(this).parents("li.quizRow:first").remove();
+			return false;
+		});
+	</script>
+
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

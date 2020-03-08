@@ -1,0 +1,32 @@
+﻿@model DataAccess.DTO.QuizDto
+
+@{
+    ViewData["Title"] = "AddQuiz";
+}
+
+@using (Html.BeginCollectionItem("quizes"))
+{
+	<li class="list-group-item quizRow">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+			<label asp-for="Question" class="control-label"></label>
+            <input asp-for="Question" class="form-control" />
+			<span asp-validation-for="Question" class="text-danger"></span>
+		</div>
+		<div class="form-group">
+			<label asp-for="PointsPerCorrectAnswer" class="control-label"></label>
+			<input asp-for="PointsPerCorrectAnswer" type="number" class="form-control" />
+			<span asp-validation-for="PointsPerCorrectAnswer" class="text-danger"></span>
+		</div>
+		<div class="form-group">
+			<label asp-for="Complexity" class="control-label"></label>
+			<input asp-for="Complexity" type="number" class="form-control" />
+			<span asp-validation-for="Complexity" class="text-danger"></span>
+		</div>
+		<button class="btn btn-warning deleteQuiz">Remove</button>
+	</li>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
