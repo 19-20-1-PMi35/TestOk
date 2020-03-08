@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccess.Data;
 using DataAccess.Data.DTO;
 using DataAccess.Data.Models;
 using DataAccess.DTO;
@@ -60,7 +61,6 @@ namespace DataAccess.Repositories
 
            try
            {
-
                return dbContext.Tests.GroupBy(t => t.Subject).Select(t => new CountedSubjectDto
                {
                    Subject = t.Key,
@@ -71,6 +71,24 @@ namespace DataAccess.Repositories
            {
                return new List<CountedSubjectDto>();
            }
+       }
+
+       public async Task<List<TestDto>> GetTestsList(string subject)
+       { 
+           await using var dbContext = _dbContextFactory.GetDbContext();
+
+           var allTests = dbContext.Tests.Select(t => new TestDto
+           {
+               Id = t.Id,
+               MaxGrade = t.MaxGrade,
+               Subject = t.Subject,
+               MinimumSuccessPercentage = t.MinimumSuccessPercentage,
+               Quizes = t.Quizes.ConvertToDto()
+           });
+
+           return string.IsNullOrEmpty(subject)
+               ? await allTests.ToListAsync()
+               : await allTests.Where(t => t.Subject.Equals(subject)).ToListAsync();
        }
     }
 }

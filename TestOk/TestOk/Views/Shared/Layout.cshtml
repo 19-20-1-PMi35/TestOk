@@ -30,12 +30,12 @@
                         </li>
                         <li class="nav-item">
                             <div class="col-10" id="testsButton">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="">Tests</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Tests" asp-route-subject="">Tests</a>
                                 <div class="tests-container">
                                     @foreach (var el in @ViewBag.Subjects)
                                     {
                                         <div class="test-item">
-                                            <span id="item-text">@el</span>
+                                            <a id="item-text" asp-controller="Home" asp-action="Tests" asp-route-subject="@el.Subject">@el.Subject (@el.Count)</a>
                                         </div>
                                     }
                                 </div>

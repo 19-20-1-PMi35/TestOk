@@ -21,7 +21,7 @@ namespace TestOk.Controllers
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            ViewBag.Subjects = _testService.GetFormattedTestSubjects();
+            ViewBag.Subjects = _testService.GetCountedTestSubjects();
             base.OnActionExecuting(filterContext);
         }
     }

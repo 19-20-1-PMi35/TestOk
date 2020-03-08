@@ -31,10 +31,20 @@ namespace TestOk.Controllers
             return View();
         }
 
-        public IActionResult Layout()
+        [Route("Tests/{subject}")]
+        public async Task<IActionResult> Tests(string subject)
         {
-            var megaMenuModel = new LayoutViewModel { Subjects = new List<string> { "heeelloog", "asss" } };
-            return View(megaMenuModel);
+            var tests = await _testService.GetTestsList(subject);
+
+            return View(new TestsModel(subject, tests));
+        }
+
+        [Route("Tests")]
+        public async Task<IActionResult> Tests()
+        {
+            var tests = await _testService.GetTestsList();
+
+            return View(new TestsModel(tests));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
