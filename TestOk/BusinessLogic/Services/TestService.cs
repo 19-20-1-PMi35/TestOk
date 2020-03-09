@@ -6,11 +6,11 @@ using DataAccess.DTO;
 
 namespace BusinessLogic.Services
 {
-    public class TestService: ITestService
+    public class TestService : ITestService
     {
         private readonly ITestRepository _testRepository;
 
-        public TestService(ITestRepository testRepository) 
+        public TestService(ITestRepository testRepository)
         {
             _testRepository = testRepository;
         }
@@ -28,6 +28,16 @@ namespace BusinessLogic.Services
         public bool SaveTest(TestDto testDto)
         {
             return _testRepository.SaveTest(testDto);
+        }
+
+        public void DeleteTest(int id)
+        {
+            _testRepository.DeleteTest(id);
+        }
+
+        public TestDto EditTest(TestDto test)
+        {
+            return _testRepository.EditTest(test);
         }
     }
 }
