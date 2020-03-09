@@ -12,6 +12,12 @@ namespace BusinessLogic
         List<CountedSubjectDto> GetCountedTestSubjects();
 
         Task<List<TestDto>> GetTestsList(string subject = null);
+
         bool SaveTest(TestDto testDto);
+
+        TestDto EditTest(TestDto test);
+
+        void DeleteTest(int id);
+
     }
 }
