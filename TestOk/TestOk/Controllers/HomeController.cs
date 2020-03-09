@@ -48,28 +48,6 @@ namespace TestOk.Controllers
             return View(new TestsModel(tests));
         }
 
-        [Route("CreateTest")]
-        public IActionResult CreateTest()
-        {
-            return View(new TestDto());
-        }
-        
-        [HttpPost("SaveTest")]
-        public IActionResult SaveTest(TestDto testDto)
-        {
-            _testService.SaveTest(testDto);
-
-            return View("CreateTest", new TestDto());
-        }
-
-        [Route("CreateQuiz")]
-        public ActionResult CreateQuiz()
-        {
-            return PartialView("CreateQuiz", new QuizDto());
-        }
-
-
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
