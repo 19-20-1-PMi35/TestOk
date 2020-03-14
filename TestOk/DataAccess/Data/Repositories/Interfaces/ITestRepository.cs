@@ -12,5 +12,9 @@ namespace DataAccess.Repositories.Interfaces
         List<CountedSubjectDto> GetCountedSubjects();
 
         Task<List<TestDto>> GetTestsList(string subject);
+
+        TestDto EditTest(TestDto test);
+
+        void DeleteTest(int id);
     }
 }

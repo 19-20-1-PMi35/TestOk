@@ -20,6 +20,19 @@ namespace DataAccess.Data
             }).ToList();
         }
 
+        public static List<Quiz> ConvertToModel(this List<QuizDto> quizes)
+        {
+            return quizes.Select(q => new Quiz
+            {
+                Question = q.Question,
+                Id = q.Id,
+                Complexity = q.Complexity,
+                PointsPerCorrectAnswer = q.PointsPerCorrectAnswer,
+                Options = q.Options.ConvertToModel(),
+                CorrectAnswers = q.Options.ConvertToModel()
+            }).ToList();
+        }
+
         public static List<QuizOptionDto> ConvertToDto(this List<QuizOption> quizOptions)
         {
             return new List<QuizOptionDto>();
@@ -33,5 +46,9 @@ namespace DataAccess.Data
             //}).ToList();
         }
 
+        public static List<QuizOption> ConvertToModel(this List<QuizOptionDto> quizOptions)
+        {
+            return new List<QuizOption>();
+        }
     }
 }

@@ -29,5 +29,15 @@ namespace BusinessLogic.Services
         {
             return _testRepository.SaveTest(testDto);
         }
+
+        public void DeleteTest(int id)
+        {
+            _testRepository.DeleteTest(id);
+        }
+
+        public TestDto EditTest(TestDto test)
+        {
+            return _testRepository.EditTest(test);
+        }
     }
 }
