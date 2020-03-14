@@ -1,9 +1,7 @@
-﻿using System;
+﻿using DataAccess.Data.Models;
+using DataAccess.DTO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using DataAccess.Data.Models;
-using DataAccess.DTO;
 
 namespace DataAccess.Data
 {

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using DataAccess.Data.DTO;
+﻿using DataAccess.Data.DTO;
 using DataAccess.DTO;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BusinessLogic
 {

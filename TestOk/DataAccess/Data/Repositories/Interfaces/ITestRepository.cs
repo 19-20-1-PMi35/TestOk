@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using DataAccess.Data.DTO;
+﻿using DataAccess.Data.DTO;
 using DataAccess.DTO;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DataAccess.Repositories.Interfaces
 {

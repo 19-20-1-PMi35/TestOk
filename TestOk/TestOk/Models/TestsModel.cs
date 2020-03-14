@@ -1,10 +1,5 @@
-﻿using System;
+﻿using DataAccess.DTO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BusinessLogic;
-using DataAccess.Data.Models;
-using DataAccess.DTO;
 
 namespace TestOk.Models
 {

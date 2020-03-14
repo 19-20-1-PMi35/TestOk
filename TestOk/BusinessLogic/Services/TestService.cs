@@ -1,16 +1,16 @@
-﻿using DataAccess.Repositories.Interfaces;
+﻿using DataAccess.Data.DTO;
+using DataAccess.DTO;
+using DataAccess.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataAccess.Data.DTO;
-using DataAccess.DTO;
 
 namespace BusinessLogic.Services
 {
-    public class TestService: ITestService
+    public class TestService : ITestService
     {
         private readonly ITestRepository _testRepository;
 
-        public TestService(ITestRepository testRepository) 
+        public TestService(ITestRepository testRepository)
         {
             _testRepository = testRepository;
         }
