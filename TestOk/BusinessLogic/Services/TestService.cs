@@ -1,8 +1,8 @@
-﻿using DataAccess.Repositories.Interfaces;
+﻿using DataAccess.Data.DTO;
+using DataAccess.DTO;
+using DataAccess.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataAccess.Data.DTO;
-using DataAccess.DTO;
 
 namespace BusinessLogic.Services
 {

@@ -1,5 +1,3 @@
-using System;
-
 namespace TestOk.Models
 {
     public class ErrorViewModel

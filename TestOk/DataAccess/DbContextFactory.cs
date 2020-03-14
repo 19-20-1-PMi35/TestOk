@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using DataAccess.Data.Models;
+﻿using DataAccess.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.IO;
 
 namespace DataAccess
 {
     public class DbContextFactory
     {
         public ApplicationDbContext GetDbContext()
-        { 
+        {
             var dbOptions = GetOptions();
 
             return new ApplicationDbContext(dbOptions);

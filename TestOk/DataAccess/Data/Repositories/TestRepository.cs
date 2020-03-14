@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DataAccess.Data;
+﻿using DataAccess.Data;
 using DataAccess.Data.DTO;
 using DataAccess.Data.Models;
 using DataAccess.DTO;
 using DataAccess.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DataAccess.Repositories
 {
@@ -38,10 +38,14 @@ namespace DataAccess.Repositories
                         {
                             Text = quizOption.Text
                         }).ToList(),
-                        CorrectAnswers = quizDto.CorrectAnswers.Select(quizOption => new QuizOption
-                        {
-                            Text = quizOption.Text
-                        }).ToList(),
+                        CorrectAnswers = quizDto.Options
+                            .Where(
+                                quizOptionDto => quizOptionDto.IsCorrectAnswer
+                            )
+                            .Select(
+                                quizOptionDto => new QuizOption { Text = quizOptionDto.Text }
+                            )
+                            .ToList()
                     }).ToList()
                 });
 

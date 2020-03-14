@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using DataAccess.Data.Models;
+﻿using DataAccess.Data.Models;
 using DataAccess.DTO;
 using DataAccess.Repositories.Interfaces;
+using System.Linq;
 
 namespace DataAccess.Repositories
 {
@@ -30,9 +28,14 @@ namespace DataAccess.Repositories
                     Options = quizDto.Options.Select(
                         quizOptionDto => new QuizOption { Text = quizOptionDto.Text }
                     ).ToList(),
-                    CorrectAnswers = quizDto.CorrectAnswers.Select(
-                        quizOptionDto => new QuizOption { Text = quizOptionDto.Text }
-                    ).ToList()
+                    CorrectAnswers = quizDto.CorrectAnswers
+                        .Where(
+                            quizOptionDto => quizOptionDto.IsCorrectAnswer
+                        )
+                        .Select(
+                            quizOptionDto => new QuizOption { Text = quizOptionDto.Text }
+                        )
+                        .ToList()
                 });
 
 

@@ -32,14 +32,14 @@
 		</div>
 
 		<div class="col-md-8">
-			<div id="quizes" class="text-center">
+			<div class="text-center">
 				<h2>Quizes</h2>
-				<ul class="list-group mt-5">
+				<ul id="quizes" class="list-group">
 					@foreach (var quiz in Model.Quizes) { Html.RenderPartial("AddQuiz", quiz); }
 				</ul>
 			</div>
-			<div class="text-center">
-				<button id="addQuiz" class="btn btn-secondary">Add Quiz</button>
+			<div class="text-center mt-4">
+				<button id="addQuiz" type="button" class="btn btn-warning">Add Quiz</button>
 			</div>
 		</div>
 
@@ -49,22 +49,50 @@
 @section Scripts
 {
 	<script>
+
 		$("#addQuiz").on("click", function (event) {
 			event.preventDefault();
-
+			
 			$.ajax({
                 async: false,
                 url: '/Quiz/Create',
 				success: function (partialView) {
 					$('#quizes').append(partialView);
 				}
-			})			
+			})
+			
+			return false;
+		});
+	</script>
+
+	<script>
+
+		$(document).on("click", "button.addQuizOption", function (event) {
+			
+			var quizOptions = $(this).closest('.quizRow').find('#quizOptions');
+			
+			$.ajax({
+                async: false,
+                url: '/QuizOption/Create',
+				success: function (partialView) {
+					quizOptions.append(partialView);
+				}
+			})	
+			
+			return false;
 		});
 	</script>
 
 	<script>
 		$(document).on("click", "button.deleteQuiz", function(){
-			$(this).parents("li.quizRow:first").remove();
+			$(this).parent(':first').remove();
+			return false;
+		});
+	</script>
+
+	<script>
+		$(document).on("click", "button.deleteQuizOption", function(){
+			$(this).parent().parent().remove();
 			return false;
 		});
 	</script>
