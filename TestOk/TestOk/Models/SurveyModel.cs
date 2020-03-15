@@ -16,5 +16,12 @@ namespace TestOk.Models
         {
             SurveyDto = surveyDto;
         }
+
+        public string TrimQuestion(string question)
+        {
+            return question.Length > 28
+                ? question.Substring(0,45) + "..."
+                : question;
+        }
     }
 }

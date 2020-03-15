@@ -3,8 +3,37 @@
     ViewData["Title"] = "Test survey";
 }
 <h1>@ViewData["Title"]</h1>
-<div class="tests-page-container">
+<div class="tests-page-container" style="overflow-y: hidden !important;">
     <div class="row">
-        <span>@Model.SurveyDto.CurrentQuiz.Question</span>
+        <span style="margin: auto">
+            <b>
+                @Model.SurveyDto.Test.Subject
+            </b>
+        </span>
     </div>
+    <hr/>
+    <div class="row" style="height: 100%">
+        <div class="col-4" style="border-right: 1px solid rgba(0,0,0,.1); height: 92%; overflow-y: scroll">
+            @foreach (var el in Model.SurveyDto.Test.Quizes)
+            {
+                <div>
+                    <span>@Model.TrimQuestion(el.Question)</span>
+                    <hr/>
+                </div>
+            }
+        </div>
+        <div class="col-8">
+            <div class="row" style="height: auto; min-height: 5%; padding-left: 20px;">
+                <span style="margin:auto">@Model.SurveyDto.CurrentQuiz.Question</span>
+            </div>
+            <hr/>
+            <div class="form-check">
+                @foreach (var option in @Model.SurveyDto.CurrentQuiz.Options)
+                {
+                    <input type="radio" class="form-check-input">
+                    <label class="form-check-label">@option.Text</label>
+                }
+                </div>
+        </div>
+        </div>
 </div>
