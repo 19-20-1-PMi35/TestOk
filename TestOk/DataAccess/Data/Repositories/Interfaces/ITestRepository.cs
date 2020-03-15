@@ -2,6 +2,7 @@
 using DataAccess.DTO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DataAccess.Data.Models;
 
 namespace DataAccess.Repositories.Interfaces
 {
@@ -16,5 +17,9 @@ namespace DataAccess.Repositories.Interfaces
         TestDto EditTest(TestDto test);
 
         void DeleteTest(int id);
+
+        Test GetTestById(int testId);
+
+        Quiz GetQuizById(int quizId);
     }
 }

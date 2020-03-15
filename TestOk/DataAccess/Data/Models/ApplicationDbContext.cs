@@ -8,6 +8,9 @@ namespace DataAccess.Data.Models
         public DbSet<Test> Tests { get; set; }
         public DbSet<Quiz> Quizes { get; set; }
         public DbSet<QuizOption> QuizOptions { get; set; }
+        public DbSet<Survey> Surveys { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }

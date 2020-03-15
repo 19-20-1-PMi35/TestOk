@@ -1,0 +1,10 @@
+﻿@model SurveyModel
+@{
+    ViewData["Title"] = "Test survey";
+}
+<h1>@ViewData["Title"]</h1>
+<div class="tests-page-container">
+    <div class="row">
+        <span>@Model.SurveyDto.CurrentQuiz.Question</span>
+    </div>
+</div>

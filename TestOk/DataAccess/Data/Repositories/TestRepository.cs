@@ -53,7 +53,7 @@ namespace DataAccess.Repositories
 
                 return true;
             }
-            catch (Exception e)
+            catch
             {
                 return false;
             }
@@ -91,8 +91,8 @@ namespace DataAccess.Repositories
             });
 
             return string.IsNullOrEmpty(subject)
-                ? await allTests.ToListAsync()
-                : await allTests.Where(t => t.Subject.Equals(subject)).ToListAsync();
+                ? await EntityFrameworkQueryableExtensions.ToListAsync(allTests)
+                : await EntityFrameworkQueryableExtensions.ToListAsync(allTests.Where(t => t.Subject.Equals(subject)));
         }
 
         public TestDto EditTest(TestDto test)
@@ -100,7 +100,7 @@ namespace DataAccess.Repositories
             using var dbContext = _dbContextFactory.GetDbContext();
             Test testToEdit = new Test();
 
-            testToEdit = dbContext.Tests.Where(x => x.Id == test.Id).FirstOrDefault();
+            testToEdit = dbContext.Tests.FirstOrDefault(x => x.Id == test.Id);
             testToEdit.Id = test.Id;
             testToEdit.MaxGrade = test.MaxGrade;
             testToEdit.MinimumSuccessPercentage = test.MinimumSuccessPercentage;
@@ -125,14 +125,57 @@ namespace DataAccess.Repositories
                     Subject = t.Subject,
                     MinimumSuccessPercentage = t.MinimumSuccessPercentage,
                     Quizes = t.Quizes
-                }).Where(x => x.Id == id).FirstOrDefault();
+                }).FirstOrDefault(x => x.Id == id);
 
                 dbContext.Tests.Remove(testToDelete);
                 dbContext.SaveChanges();
             }
-            catch (Exception e)
+            catch
             {
                 dbContext.SaveChanges();
+            }
+        }
+
+        public Test GetTestById(int testId)
+        {
+            using var dbContext = _dbContextFactory.GetDbContext();
+
+            try
+            {
+                return dbContext.Tests.Select(t => new Test
+                {
+                    Subject = t.Subject,
+                    Id = t.Id,
+                    MinimumSuccessPercentage = t.MinimumSuccessPercentage,
+                    MaxGrade = t.MaxGrade,
+                    Quizes = t.Quizes
+                }).FirstOrDefault(t => t.Id == testId);
+            }
+            catch
+            {
+                return new Test();
+            }
+        }
+
+        public Quiz GetQuizById(int quizId)
+        {
+            using var dbContext = _dbContextFactory.GetDbContext();
+
+            try
+            {
+                return dbContext.Quizes.Select(q => new Quiz
+                {
+                    Id = q.Id,
+                    CorrectAnswers = q.CorrectAnswers,
+                    Question = q.Question,
+                    Options = q.Options,
+                    Complexity = q.Complexity,
+                    PointsPerCorrectAnswer = q.PointsPerCorrectAnswer
+                }).FirstOrDefault(q => q.Id == quizId);
+            }
+            catch
+            {
+                return new Quiz();
             }
         }
     }

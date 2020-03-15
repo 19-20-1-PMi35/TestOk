@@ -1,7 +1,10 @@
 using BusinessLogic;
 using BusinessLogic.Services;
+using BusinessLogic.Services.Interfaces;
 using DataAccess;
 using DataAccess.Data.Models;
+using DataAccess.Data.Repositories;
+using DataAccess.Data.Repositories.Interfaces;
 using DataAccess.Repositories;
 using DataAccess.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -41,6 +44,8 @@ namespace TestOk
             services.AddTransient<IQuizRepository, QuizRepository>();
             services.AddTransient<ITestRepository, TestRepository>();
             services.AddTransient<ITestService, TestService>();
+            services.AddTransient<ISurveyRepository, SurveyRepository>();
+            services.AddTransient<ISurveyService, SurveyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -2,6 +2,7 @@
 using DataAccess.DTO;
 using System.Collections.Generic;
 using System.Linq;
+using DataAccess.Data.DTO;
 
 namespace DataAccess.Data
 {
@@ -35,20 +36,74 @@ namespace DataAccess.Data
 
         public static List<QuizOptionDto> ConvertToDto(this List<QuizOption> quizOptions)
         {
-            return new List<QuizOptionDto>();
+            try
+            {
 
-            //TODO: uncomment when Quizes have non-empty options
-
-            //return quizOptions.Select(q => new QuizOptionDto
-            //{
-            //    Id = q.Id,
-            //    Text = q.Text
-            //}).ToList();
+                return quizOptions.Select(q => new QuizOptionDto
+                {
+                    Id = q.Id,
+                    Text = q.Text
+                }).ToList();
+            }
+            catch
+            {
+                return new List<QuizOptionDto>();
+            }
         }
 
         public static List<QuizOption> ConvertToModel(this List<QuizOptionDto> quizOptions)
         {
             return new List<QuizOption>();
+        }
+
+        public static QuizDto ConvertToDto(this Quiz quiz)
+        {
+            return new QuizDto
+            {
+                Id = quiz.Id,
+                CorrectAnswers = quiz.CorrectAnswers.ConvertToDto(),
+                Options = quiz.Options.ConvertToDto(),
+                Question = quiz.Question,
+                Complexity = quiz.Complexity,
+                PointsPerCorrectAnswer = quiz.PointsPerCorrectAnswer
+            };
+        }
+
+        public static TestDto ConvertToDto(this Test test)
+        {
+            return new TestDto
+            {
+                Subject = test.Subject,
+                MinimumSuccessPercentage = test.MinimumSuccessPercentage,
+                MaxGrade = test.MaxGrade,
+                Id = test.Id,
+                Quizes = test.Quizes.ConvertToDto()
+            };
+        }
+
+        public static List<AnswerDto> ConvertToDto(this List<Answer> answers)
+        {
+            return answers.Select(a => new AnswerDto
+            {
+                Id = a.Id,
+                Quiz = a.Quiz.ConvertToDto(),
+                QuizAnswers = a.QuizAnswers.ConvertToDto()
+            }).ToList();
+        }
+        public static SurveyDto ConvertToDto(this Survey survey, TestDto testDto, QuizDto quizDto)
+        {
+            return new SurveyDto
+            {
+                Test = testDto,
+                Answers = survey.Answers == null 
+                              ? new List<AnswerDto>() 
+                              : survey.Answers.ConvertToDto(),
+                Id = survey.Id,
+                CorrectAnswers = survey.CorrectAnswers,
+                IsFinished = survey.IsFinished,
+                CurrentQuiz = quizDto,
+                UserId = survey.UserId
+            };
         }
     }
 }
