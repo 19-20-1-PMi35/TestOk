@@ -35,7 +35,7 @@
                             <div class="col-10" id="testsButton">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Tests" asp-route-subject="">Tests</a>
                                 <div class="tests-container">
-                                    @foreach (var el in @ViewBag.Subjects)
+                                    @foreach (var el in @ViewBag.Subjects ?? new List<DataAccess.Data.DTO.CountedSubjectDto>())
                                     {
                                         <div class="test-item">
                                             <a id="item-text" asp-controller="Home" asp-action="Tests" asp-route-subject="@el.Subject">@el.Subject (@el.Count)</a>
