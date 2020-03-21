@@ -11,17 +11,22 @@ namespace TestOk.Controllers
         {
             _testService = testService;
         }
-        public IActionResult Create()
+        public ActionResult Create()
         {
             return View(new TestDto());
         }
 
         [HttpPost]
-        public IActionResult Save(TestDto testDto)
+        public IActionResult Create(TestDto testDto)
         {
-            _testService.SaveTest(testDto);
+            if (ModelState.IsValid && TryValidateModel(testDto.Quizes))
+            {
+                _testService.SaveTest(testDto);
 
-            return RedirectToAction("Create");
+                return RedirectToAction("Create");
+            }
+
+            return View(testDto);
         }
     }
 }

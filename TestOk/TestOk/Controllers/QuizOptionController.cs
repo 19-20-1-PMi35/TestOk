@@ -10,9 +10,9 @@ namespace TestOk.Controllers
         {
         }
 
-        public ActionResult Create()
+        public ActionResult Create(QuizOptionDto quizOptionDto)
         {
-            return PartialView(new QuizOptionDto());
+            return PartialView(quizOptionDto);
         }
     }
 }

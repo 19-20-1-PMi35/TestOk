@@ -4,17 +4,17 @@
     ViewData["Title"] = "Create";
 }
 
-@using (Html.BeginCollectionItem("quizOptions"))
+@using (Html.BeginCollectionItem("options"))
 {
 	<div class="container quizOptionRow">
 		<div class="row">
 
 			<div class="col-md-11">
 				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-			    <div class="form-group">
-				    <input asp-for="Text" class="form-control" />
-					<span asp-validation-for="Text" class="text-danger"></span>
-				</div>
+                <div class="form-group">
+                    <input asp-for="Text" class="form-control" />
+                    <span asp-validation-for="Text" class="text-danger"></span>
+                </div>
 				<div class="col-md-12 text-left">
 					<div class="form-check">
 						<input asp-for="IsCorrectAnswer" type="checkbox" class="form-check-input" />
