@@ -8,6 +8,7 @@
 {
 	<li class="list-group-item quizRow">
 		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        
         <div class="form-group">
 			<label asp-for="Question" class="control-label"></label>
             <input asp-for="Question" class="form-control" />
@@ -28,9 +29,11 @@
 		</div>
 		<div class="text-center mt-2">
 			<h5>Options</h5>
-			<div id="quizOptions" class="mt-2">
-				@foreach (var quizOption in Model.Options) { Html.RenderPartial("AddQuizOption", quizOption); }
-			</div>
+            <div id="quizOptions" class="mt-2">
+                @foreach (var quizOption in Model.Options) {
+                    Html.RenderPartial("../QuizOption/Create", quizOption); 
+                }
+            </div>
 		</div>
 		<div class="text-center mt-3">
 			<button id="addQuizOption" type="button" class="btn btn-secondary btn-sm addQuizOption">

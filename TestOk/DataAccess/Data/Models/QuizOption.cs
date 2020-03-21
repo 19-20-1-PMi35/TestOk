@@ -1,6 +1,8 @@
 ﻿namespace DataAccess.Data.Models
 {
-    public class QuizOption : AbstractQuizOption
+    public class QuizOption
     {
+        public int Id { get; set; }
+        public string Text { get; set; }
     }
 }
