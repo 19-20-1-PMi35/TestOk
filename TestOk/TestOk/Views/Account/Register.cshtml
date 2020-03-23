@@ -24,6 +24,11 @@
         <span asp-validation-for="PasswordConfirm"></span>
     </div>
     <div>
+        <label asp-for="Role"></label><br />
+        <input type="radio" asp-for="Role" value=@RolesEnum.Student />Student <br />
+        <input type="radio" asp-for="Role" value=@RolesEnum.Teacher />Teacher
+    </div>
+    <div>
         <input type="submit" value="Регистрация" />
     </div>
 </form>

@@ -38,7 +38,9 @@ namespace TestOk.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
-                {
+                {                    
+                    await _userManager.AddToRoleAsync(user, model.Role.ToString());
+
                     // set cookies
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");

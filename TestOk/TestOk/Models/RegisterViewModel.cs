@@ -22,5 +22,8 @@ namespace TestOk.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]
         public string PasswordConfirm { get; set; }
+
+        [Display(Name = "Role")]
+        public RolesEnum Role { get; set; }
     }
 }
