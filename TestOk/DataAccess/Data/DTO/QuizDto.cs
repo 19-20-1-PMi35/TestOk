@@ -7,7 +7,7 @@ namespace DataAccess.DTO
     {
         public int Id { get; set; }
         [Required]
-        [StringLength(200, MinimumLength =10)]
+        [StringLength(200, MinimumLength = 10)]
         public string Question { get; set; }
 
         [Required]

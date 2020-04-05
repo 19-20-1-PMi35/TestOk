@@ -1,5 +1,6 @@
 ﻿@model DataAccess.DTO.QuizDto
 
+
 @{
     ViewData["Title"] = "Create";
 }
@@ -8,7 +9,7 @@
 {
 	<li class="list-group-item quizRow">
 		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        
+
         <div class="form-group">
 			<label asp-for="Question" class="control-label"></label>
             <input asp-for="Question" class="form-control" />
@@ -27,16 +28,17 @@
 		<div class="w-100">
 			<hr>
 		</div>
-		<div class="text-center mt-2">
-			<h5>Options</h5>
-            <div id="quizOptions" class="mt-2">
-                @foreach (var quizOption in Model.Options) {
-                    Html.RenderPartial("../QuizOption/Create", quizOption); 
+        <div class="text-center mt-2">
+            <h5>Options</h5>
+            <div id="options" class="mt-2">
+                @for (int i = 0; i < Model.Options.Count; ++i)
+                {
+                    await Html.RenderPartialAsync("../QuizOption/Create", Model.Options[i]);
                 }
             </div>
-		</div>
+        </div>
 		<div class="text-center mt-3">
-			<button id="addQuizOption" type="button" class="btn btn-secondary btn-sm addQuizOption">
+			<button id="addQuizOption" type="button" class="btn btn-secondary btn-sm addQuizOption" quizprefix="@Html.ViewData.TemplateInfo.HtmlFieldPrefix">
 				Add Option
 			</button>
 		</div>
