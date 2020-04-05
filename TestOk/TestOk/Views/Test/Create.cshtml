@@ -51,6 +51,22 @@
 
 @section Scripts
 {
+
+  <script>
+      $("#submit").on("click", function (event) {
+          var $form = $("form");
+
+          $form.unbind();
+          $form.data("validator", null);
+
+          $.validator.unobtrusive.parse(document);
+
+          $form.validate().form();
+
+          return $form.validate().valid();
+        });
+  </script>
+
 	<script>
 		$("#addQuiz").on("click", function (event) {
 			event.preventDefault();
