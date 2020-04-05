@@ -48,13 +48,20 @@
 
 @section Scripts
 {
-    @*<script>
+    <script>
         $("#submit").on("click", function (event) {
+            var $form = $("form");
 
-            $("form").validate();
-            return false;
+            $form.unbind();
+            $form.data("validator", null);
+
+            $.validator.unobtrusive.parse(document);
+
+            $form.validate().form();
+
+            return $form.validate().valid();
         });
-    </script>*@
+    </script>
 
 
 	<script>
