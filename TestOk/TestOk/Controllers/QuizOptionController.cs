@@ -10,8 +10,10 @@ namespace TestOk.Controllers
         {
         }
 
-        public ActionResult Create(QuizOptionDto quizOptionDto)
+        public ActionResult Create(QuizOptionDto quizOptionDto, string prefix)
         {
+            ViewData["prefix"] = prefix;
+
             return PartialView(quizOptionDto);
         }
     }

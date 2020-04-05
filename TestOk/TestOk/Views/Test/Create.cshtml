@@ -34,9 +34,12 @@
 		<div class="col-md-8">
 			<div class="text-center">
 				<h2>Quizes</h2>
-				<ul id="quizes" class="list-group">
-                        @foreach (var quiz in Model.Quizes) { Html.RenderPartial("../Quiz/Create", quiz); }
-				</ul>
+                <ul id="quizes" class="list-group">
+                    @for (int i = 0; i < Model.Quizes.Count; ++i)
+                    {
+                        await Html.RenderPartialAsync("../Quiz/Create", Model.Quizes[i]);
+                    }
+                    </ul>
 			</div>
 			<div class="text-center mt-4">
 				<button id="addQuiz" type="button" class="btn btn-warning">Add Quiz</button>
@@ -48,15 +51,6 @@
 
 @section Scripts
 {
-    @*<script>
-        $("#submit").on("click", function (event) {
-
-            $("form").validate();
-            return false;
-        });
-    </script>*@
-
-
 	<script>
 		$("#addQuiz").on("click", function (event) {
 			event.preventDefault();
@@ -73,23 +67,27 @@
 		});
 	</script>
 
-	<script>
+    <script>
 
 		$(document).on("click", "button.addQuizOption", function (event) {
-			
-			var quizOptions = $(this).closest('.quizRow').find('#quizOptions');
-			
-			$.ajax({
+			console.log($(this)[0])
+			var quizprefix = $(this)[0].getAttribute("quizprefix");
+            var options = $(this).closest('.quizRow').find('#options');
+
+            $.ajax({
                 async: false,
                 url: '/QuizOption/Create',
-				success: function (partialView) {
-					quizOptions.append(partialView);
-				}
-			})	
-			
-			return false;
-		});
-	</script>
+                data: {
+                    prefix: quizprefix
+                },
+                success: function (partialView) {
+                    options.append(partialView);
+                }
+            })
+
+            return false;
+        });
+    </script>
 
 	<script>
 		$(document).on("click", "button.deleteQuiz", function(){
