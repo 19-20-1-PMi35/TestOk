@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-
-using Microsoft.AspNetCore.Identity;
+﻿using BusinessLogic;
 using DataAccess.Data.Models;
-using BusinessLogic;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using TestOk.Models;
 
 namespace TestOk.Controllers
@@ -38,7 +34,7 @@ namespace TestOk.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
-                {                    
+                {
                     await _userManager.AddToRoleAsync(user, model.Role.ToString());
 
                     // set cookies
@@ -69,8 +65,8 @@ namespace TestOk.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
-                var isPasswordConfirmed = await _userManager.CheckPasswordAsync(user, model.Password);                
-                
+                var isPasswordConfirmed = await _userManager.CheckPasswordAsync(user, model.Password);
+
                 //var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
                 if (isPasswordConfirmed)
                 {

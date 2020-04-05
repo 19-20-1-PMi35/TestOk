@@ -29,6 +29,7 @@ namespace DataAccess.Repositories
                 {
                     MinimumSuccessPercentage = testDto.MinimumSuccessPercentage,
                     Subject = testDto.Subject,
+                    MaxGrade = testDto.MaxGrade,
                     Quizes = testDto.Quizes.Select(quizDto => new Quiz
                     {
                         Question = quizDto.Question,

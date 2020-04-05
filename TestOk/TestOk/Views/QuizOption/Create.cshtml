@@ -4,11 +4,10 @@
     ViewData["Title"] = "Create";
 }
 
-@using (Html.BeginCollectionItem("options"))
+@using (Html.BeginCollectionItem($"{ViewData["prefix"]}.options"))
 {
 	<div class="container quizOptionRow">
 		<div class="row">
-
 			<div class="col-md-11">
 				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
