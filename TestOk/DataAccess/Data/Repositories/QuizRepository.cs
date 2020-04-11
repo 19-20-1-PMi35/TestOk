@@ -1,7 +1,9 @@
-﻿using DataAccess.Data.Models;
+﻿using System.Data.Entity;
+using DataAccess.Data.Models;
 using DataAccess.DTO;
 using DataAccess.Repositories.Interfaces;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DataAccess.Repositories
 {
@@ -47,6 +49,21 @@ namespace DataAccess.Repositories
             {
                 return false;
             }
+        }
+
+        public Quiz GetQuizById(int quizId)
+        {
+            using var dbContext = _dbContextFactory.GetDbContext();
+
+            return dbContext.Quizes.Select(q => new Quiz
+            {
+                Id = q.Id,
+                CorrectAnswers = q.CorrectAnswers,
+                Question = q.Question,
+                Options = q.Options,
+                Complexity = q.Complexity,
+                PointsPerCorrectAnswer = q.PointsPerCorrectAnswer
+            }).FirstOrDefault(q => q.Id == quizId);
         }
     }
 }

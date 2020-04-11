@@ -1,8 +1,8 @@
-﻿using DataAccess.Data.Models;
+﻿using System;
+using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.IO;
+using DataAccess.Data.Models;
 
 namespace DataAccess
 {
