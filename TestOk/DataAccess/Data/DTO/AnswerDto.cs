@@ -9,8 +9,10 @@ namespace DataAccess.Data.DTO
     {
         public int Id { get; set; }
 
-        public QuizDto Quiz { get; set; }
+        public QuizOptionDto QuizAnswer { get; set; }
 
-        public List<QuizOptionDto> QuizAnswers { get; set; }
+        public int QuizId { get; set; }
+
+        public int SurveyId { get; set; }
     }
 }

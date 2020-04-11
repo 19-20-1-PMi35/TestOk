@@ -6,7 +6,13 @@ namespace BusinessLogic.Services.Interfaces
     public interface ISurveyService
     {
         Task<SurveyDto> StartSurvey(int testId);
-        
-        SurveyDto GetSurvey();
+
+        Task<SurveyDto> GetSurvey();
+
+        Task ChooseAnswer(int quizId, int optionId, int surveyId);
+
+        Task<SurveyDto> SwitchQuiz(int quizId);
+
+        Task FinishSurvey();
     }
 }

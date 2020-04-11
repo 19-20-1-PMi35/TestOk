@@ -1,0 +1,7 @@
+.finishButton {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(64, 64, 64, 0.2);
+    border-radius: 15px;
+    margin: auto;
+}

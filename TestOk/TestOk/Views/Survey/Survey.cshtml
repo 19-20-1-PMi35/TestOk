@@ -2,38 +2,79 @@
 @{
     ViewData["Title"] = "Test survey";
 }
-<h1>@ViewData["Title"]</h1>
-<div class="tests-page-container" style="overflow-y: hidden !important;">
-    <div class="row">
-        <span style="margin: auto">
-            <b>
-                @Model.SurveyDto.Test.Subject
-            </b>
-        </span>
-    </div>
-    <hr/>
-    <div class="row" style="height: 100%">
-        <div class="col-4" style="border-right: 1px solid rgba(0,0,0,.1); height: 92%; overflow-y: scroll">
-            @foreach (var el in Model.SurveyDto.Test.Quizes)
-            {
-                <div>
-                    <span>@Model.TrimQuestion(el.Question)</span>
-                    <hr/>
-                </div>
-            }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="~/js/survey.js"></script>
+</head>
+<body>
+    <h1>@ViewData["Title"]</h1>
+    <div class="tests-page-container" style="overflow-y: hidden !important;">
+        <div class="row">
+            <span style="margin: auto">
+                <b>
+                    @Model.SurveyDto.Test.Subject
+                </b>
+            </span>
         </div>
-        <div class="col-8">
-            <div class="row" style="height: auto; min-height: 5%; padding-left: 20px;">
-                <span style="margin:auto">@Model.SurveyDto.CurrentQuiz.Question</span>
-            </div>
-            <hr/>
-            <div class="form-check">
-                @foreach (var option in @Model.SurveyDto.CurrentQuiz.Options)
+        <hr />
+        <div class="row" style="height: 100%">
+            <div class="col-4" style="border-right: 1px solid rgba(0,0,0,.1); height: 92%; overflow-y: scroll">
+                @foreach (var el in Model.SurveyDto.Test.Quizes)
                 {
-                    <input type="radio" class="form-check-input">
-                    <label class="form-check-label">@option.Text</label>
+                    <div class="row">
+                        <div class="col-1">
+                            @if (Model.IsAnyAnswer(el.Id))
+                            {
+                                <svg class="bi bi-check" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3.5-3.5a.5.5 0 11.708-.708L6.5 10.293l6.646-6.647a.5.5 0 01.708 0z" clip-rule="evenodd" />
+                                </svg>
+                            }
+                        </div>
+                        <div class="col-11">
+                            <a href="@Url.Action("SwitchQuiz", "Survey", new {quizId = el.Id})">
+                                <span>@Model.TrimQuestion(el.Question)</span>
+                            </a>
+                        </div>
+                    </div>
+                    <hr />
+
                 }
+            </div>
+            <div class="col-8">
+                <div class="row" style="height: auto; min-height: 5%; padding-left: 20px;">
+                    <span style="margin:auto">@Model.SurveyDto.CurrentQuiz.Question</span>
                 </div>
+                <hr />
+                <div class="form-group" style="height: 70%; overflow-y: scroll;">
+                    @{
+                        var height = (int)(100.0 / Model.SurveyDto.CurrentQuiz.Options.Count);
+
+                        height = height < 10 ? 10 : height;
+                    }
+
+                    @foreach (var option in @Model.SurveyDto.CurrentQuiz.Options)
+                    {
+                        var background = Model.IsChosenAnswer(option.Id) ? "rgba(55, 235, 52, 0.2);" : "rgba(64, 64, 64, 0.2);";
+
+                        <a href="@Url.Action("ChooseAnswer", "Survey", new {quizId = Model.SurveyDto.CurrentQuiz.Id, optionId = option.Id, surveyId = @Model.SurveyDto.Id })">
+                            <div class="row" style="margin: auto; height: @height%; background-color:@background  margin-bottom: 5px !important; border-radius: 15px;">
+                                <span class="form-check-label" style="margin: auto;">@option.Text</span>
+                            </div>
+                        </a>
+                    }
+
+                </div>
+                <div class="row">
+                    <div id="finishButton" style="margin: auto; height: 100%; width: 30%; background-color: rgba(64, 64, 64, 0.2); margin-bottom: 5px !important; border-radius: 5px; text-align: center">
+                        <a href="@Url.Action("FinishSurvey", "Survey")">
+                            <b style="margin: auto;">Finish</b>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-        </div>
-</div>
+    </div>
+</body>

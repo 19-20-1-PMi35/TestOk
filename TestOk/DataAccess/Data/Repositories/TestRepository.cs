@@ -156,27 +156,5 @@ namespace DataAccess.Repositories
                 return new Test();
             }
         }
-
-        public Quiz GetQuizById(int quizId)
-        {
-            using var dbContext = _dbContextFactory.GetDbContext();
-
-            try
-            {
-                return dbContext.Quizes.Select(q => new Quiz
-                {
-                    Id = q.Id,
-                    CorrectAnswers = q.CorrectAnswers,
-                    Question = q.Question,
-                    Options = q.Options,
-                    Complexity = q.Complexity,
-                    PointsPerCorrectAnswer = q.PointsPerCorrectAnswer
-                }).FirstOrDefault(q => q.Id == quizId);
-            }
-            catch
-            {
-                return new Quiz();
-            }
-        }
     }
 }

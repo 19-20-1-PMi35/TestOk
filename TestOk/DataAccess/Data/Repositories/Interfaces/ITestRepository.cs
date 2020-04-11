@@ -19,7 +19,5 @@ namespace DataAccess.Repositories.Interfaces
         void DeleteTest(int id);
 
         Test GetTestById(int testId);
-
-        Quiz GetQuizById(int quizId);
     }
 }

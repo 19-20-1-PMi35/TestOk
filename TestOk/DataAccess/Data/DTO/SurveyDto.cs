@@ -16,10 +16,10 @@ namespace DataAccess.Data.DTO
 
         public bool IsFinished { get; set; }
 
-        public int CorrectAnswers { get; set; }
+        public int Mark { get; set; }
 
         public TestDto Test { get; set; }
 
-        public List<AnswerDto> Answers { get; set; }
+        public List<AnswerDto> CurrentQuizAnswers { get; set; }
     }
 }

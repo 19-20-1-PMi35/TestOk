@@ -86,23 +86,46 @@ namespace DataAccess.Data
             return answers.Select(a => new AnswerDto
             {
                 Id = a.Id,
-                Quiz = a.Quiz.ConvertToDto(),
-                QuizAnswers = a.QuizAnswers.ConvertToDto()
+                SurveyId = a.Survey.Id,
+                QuizId = a.Quiz.Id,
+                QuizAnswer = a.QuizOption.ConvertToDto()
             }).ToList();
         }
-        public static SurveyDto ConvertToDto(this Survey survey, TestDto testDto, QuizDto quizDto)
+
+        public static SurveyDto ConvertToDto(this Survey survey, Test test, Quiz quiz, List<Answer> answers)
         {
             return new SurveyDto
             {
-                Test = testDto,
-                Answers = survey.Answers == null 
-                              ? new List<AnswerDto>() 
-                              : survey.Answers.ConvertToDto(),
                 Id = survey.Id,
-                CorrectAnswers = survey.CorrectAnswers,
+                Test = test.ConvertToDto(),
+                CurrentQuiz = quiz.ConvertToDto(),
+                CurrentQuizAnswers = answers.ConvertToDto(),
                 IsFinished = survey.IsFinished,
-                CurrentQuiz = quizDto,
-                UserId = survey.UserId
+                UserId = survey.UserId.GetValueOrDefault(),
+                Mark = survey.Mark
+            };
+        }
+
+        public static SurveyDto ConvertToDto(this Survey survey, List<Answer> answers)
+        {
+            return new SurveyDto
+            {
+                Id = survey.Id,
+                Test = survey.Test.ConvertToDto(),
+                CurrentQuiz = survey.CurrentQuiz.ConvertToDto(),
+                CurrentQuizAnswers = ( answers != null && answers.Count != 0) ? answers.ConvertToDto() : new List<AnswerDto>(),
+                IsFinished = survey.IsFinished,
+                UserId = survey.UserId.GetValueOrDefault(),
+                Mark = survey.Mark
+            };
+        }
+
+        public static QuizOptionDto ConvertToDto(this QuizOption quizOption)
+        {
+            return new QuizOptionDto
+            {
+                Id = quizOption.Id,
+                Text = quizOption.Text
             };
         }
     }
