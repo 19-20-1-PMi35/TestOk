@@ -1,0 +1,8 @@
+﻿#title {
+    min-height: 40vh;
+    background: url('/images/blured-background.jpg');
+}
+
+#features {
+    min-height: 800px
+}
