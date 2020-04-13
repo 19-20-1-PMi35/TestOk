@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
@@ -9,19 +10,23 @@ namespace TestOk.Controllers
 {
     public class StatisticsController : SharedController
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly ITestService _testService;
+        private readonly IStatisticsService _statisticsService;
 
-        public StatisticsController(ILogger<HomeController> logger, ITestService testService) : base(testService)
+        public StatisticsController(ITestService testService, IStatisticsService statisticsService) : base(testService)
         {
-            _logger = logger;
+            _statisticsService = statisticsService;
             _testService = testService;
         }
 
-        public IActionResult Index()
+        public IActionResult GetCurrent()
         {
+            var average = _statisticsService.GetAverageMark();
 
-            return View();
+            //currently not working
+            //var forCertain = _statisticsService.GetMarkForTest(0);
+
+            return View(new StatisticsModel { AverageMark = average/*, ForCertain = forCertain*/ });
         }
     }
 }

@@ -67,7 +67,7 @@ namespace DataAccess.Data.Repositories
                 dbContext.Surveys.Add(survey);
 
                 await dbContext.SaveChangesAsync();
-                
+
                 return survey.ConvertToDto(test, test.Quizes.First(), new List<Answer>());
             }
             catch
@@ -117,14 +117,14 @@ namespace DataAccess.Data.Repositories
                 SurveyId = surveyId
             });
 
-            SaveChanges:
-                await dbContext.SaveChangesAsync();
+        SaveChanges:
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task<SurveyDto> SwitchQuiz(int quizId, int userId)
         {
             await using var dbContext = _dbContextFactory.GetDbContext();
-            var surveyId = GetSurveyByUserId(userId, dbContext).Select(s => new {s.Id, s.IsFinished})
+            var surveyId = GetSurveyByUserId(userId, dbContext).Select(s => new { s.Id, s.IsFinished })
                 .FirstOrDefault(s => !s.IsFinished).Id;
 
             dbContext.Surveys.FirstOrDefault(s => s.Id == surveyId).CurrentQuizId = quizId;
@@ -141,14 +141,22 @@ namespace DataAccess.Data.Repositories
             var survey = await dbContext.Surveys.FirstAsync(s => s.Id == surveyId);
 
             survey.IsFinished = true;
-            survey.Mark = (int) mark;
+            survey.Mark = (int)mark;
 
             await dbContext.SaveChangesAsync();
         }
 
+        public List<SurveyDto> FinishedSurveys(int userId)
+        {
+            using var dbContext = _dbContextFactory.GetDbContext();
+
+            var surveys = GetSurveyByUserId(userId, dbContext);
+
+            return surveys.Select(x => x.ConvertToDto(new List<Answer>())).ToList();
+        }
+
         private IEnumerable<Survey> GetSurveyByUserId(int userId, ApplicationDbContext dbContext)
         {
-
             return dbContext.Surveys.Select(s => new Survey
             {
                 Id = s.Id,

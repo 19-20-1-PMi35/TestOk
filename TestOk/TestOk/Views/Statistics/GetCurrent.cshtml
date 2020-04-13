@@ -1,0 +1,22 @@
+﻿@model StatisticsModel
+
+@{
+    ViewData["Title"] = "Get marks";
+}
+
+<div class="form-group">
+
+    <h5 class="text-danger">Here will be displayed your score for certain test</h5>
+    <div class="w-100">
+        <h3 class="text-success">@Model.ForCertain</h3>
+    </div>
+    <h5 class="text-info">Here will be displayed your score for certain test</h5>
+
+</div>
+
+<div>
+
+    <h5>Here will be displayed average score </h5>
+    <h3 class="text-primary">@Model.AverageMark</h3>
+
+</div>

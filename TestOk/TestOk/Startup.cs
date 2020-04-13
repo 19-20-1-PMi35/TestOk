@@ -52,6 +52,7 @@ namespace TestOk
             services.AddTransient<ITestService, TestService>();
             services.AddTransient<ISurveyRepository, SurveyRepository>();
             services.AddTransient<ISurveyService, SurveyService>();
+            services.AddTransient<IStatisticsService, StatisticsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
