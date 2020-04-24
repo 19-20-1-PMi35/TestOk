@@ -17,6 +17,6 @@ namespace DataAccess.Data.Repositories.Interfaces
 
         Task<SurveyDto> SwitchQuiz(int quizId, int userId);
 
-        Task FinishSurvey(int surveyId, decimal mark);
+        Task FinishSurvey(int surveyId, double mark);
     }
 }

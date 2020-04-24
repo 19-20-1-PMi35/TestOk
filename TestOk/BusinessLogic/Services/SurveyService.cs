@@ -58,7 +58,7 @@ namespace BusinessLogic.Services
 
             var quizes = survey.Test.Quizes.Select(q => _quizRepository.GetQuizById(q.Id));
 
-            decimal mark = 0;
+            double mark = 0;
 
             foreach (var quiz in quizes)
             {

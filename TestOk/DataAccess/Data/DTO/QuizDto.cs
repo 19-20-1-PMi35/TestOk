@@ -11,8 +11,8 @@ namespace DataAccess.DTO
         public string Question { get; set; }
 
         [Required]
-        public decimal PointsPerCorrectAnswer { get; set; }
-        public decimal Complexity { get; set; }
+        public double PointsPerCorrectAnswer { get; set; }
+        public double Complexity { get; set; }
         public List<QuizOptionDto> Options { get; set; } = new List<QuizOptionDto>();
         public List<QuizOptionDto> CorrectAnswers { get; set; } = new List<QuizOptionDto>();
     }
