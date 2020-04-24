@@ -28,25 +28,28 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Create">Create Test</a>
-                        </li>
-                        <li class="nav-item">
-                            <div class="col-10" id="testsButton">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Tests" asp-route-subject="">Tests</a>
-                                <div class="tests-container">
-                                    @foreach (var el in @ViewBag.Subjects ?? new List<DataAccess.Data.DTO.CountedSubjectDto>())
-                                    {
-                                        <div class="test-item">
-                                            <a id="item-text" asp-controller="Home" asp-action="Tests" asp-route-subject="@el.Subject">@el.Subject (@el.Count)</a>
-                                        </div>
-                                    }
+                        @if (User.IsInRole("teacher"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Create">Create Test</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("teacher") || User.IsInRole("student"))
+                        {
+                            <li class="nav-item">
+                                <div class="col-10" id="testsButton">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Tests" asp-route-subject="">Tests</a>
+                                    <div class="tests-container">
+                                        @foreach (var el in @ViewBag.Subjects ?? new List<DataAccess.Data.DTO.CountedSubjectDto>())
+                                        {
+                                            <div class="test-item">
+                                                <a id="item-text" asp-controller="Home" asp-action="Tests" asp-route-subject="@el.Subject">@el.Subject (@el.Count)</a>
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

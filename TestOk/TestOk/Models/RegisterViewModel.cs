@@ -5,6 +5,26 @@ namespace TestOk.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "Surname")]
+        public string Surname { get; set; }
+
+        [Required]
+        [Display(Name = "Faculty")]
+        public string Faculty { get; set; }
+
+        [Required]
+        [Display(Name = "Group")]
+        public string Group { get; set; }
+
+        [Required]
+        [Display(Name = "Gradebook Number")]
+        public string GradebookNumber { get; set; }
+
+        [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
 

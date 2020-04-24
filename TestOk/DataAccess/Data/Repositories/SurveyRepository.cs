@@ -134,7 +134,7 @@ namespace DataAccess.Data.Repositories
             return await GetActiveSurvey(userId);
         }
 
-        public async Task FinishSurvey(int surveyId, decimal mark)
+        public async Task FinishSurvey(int surveyId, double mark)
         {
             await using var dbContext = _dbContextFactory.GetDbContext();
 

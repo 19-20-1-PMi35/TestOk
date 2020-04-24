@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "Manage your account";
+}
+
+@model TestOk.Models.UserViewModel
+
+<h2>Manage your account</h2>
+
+<table>
+    <tr><th width="170px" style="font-weight:initial;" class="text-primary">Name</th><th>@Model.Name</th></tr>
+    <tr><th style="font-weight:initial;" class="text-primary">Surname</th><th>@Model.Surname</th></tr>
+    <tr><th style="font-weight:initial;" class="text-primary">Email</th><th>@Model.Email</th></tr>
+    <tr><th style="font-weight:initial;" class="text-primary">Faculty</th><th>@Model.Faculty</th></tr>
+    @if (User.IsInRole("student"))
+    {
+        <tr><th style="font-weight:initial;" class="text-primary">Group</th><th>@Model.Group</th></tr>
+        <tr><th style="font-weight:initial;" class="text-primary">Gradebook Number</th><th>@Model.GradebookNumber</th></tr>
+    }
+</table>
+
+<br/>
+
+<div>
+    <a class="btn btn-primary" asp-action="ChangePassword" >Change password</a>
+</div>

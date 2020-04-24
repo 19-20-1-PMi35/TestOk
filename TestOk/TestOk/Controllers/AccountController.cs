@@ -29,7 +29,16 @@ namespace TestOk.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = new ApplicationUser { Email = model.Email, UserName = model.Email };
+                ApplicationUser user = new ApplicationUser 
+                { 
+                    Email = model.Email,
+                    UserName = model.Email,
+                    Name = model.Name,
+                    Surname = model.Surname,
+                    Faculty = model.Faculty,
+                    Group = model.Group,
+                    GradebookNumber = model.GradebookNumber
+                };
                 // Add User to data base
                 var result = await _userManager.CreateAsync(user, model.Password);
 
@@ -88,5 +97,67 @@ namespace TestOk.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Manage()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            UserViewModel model = new UserViewModel()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Name = user.Name,
+                Surname = user.Surname,
+                Faculty = user.Faculty,
+                Group = user.Group,
+                GradebookNumber = user.GradebookNumber                
+            };
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(HttpContext.User);
+                if (user != null)
+                {
+                    IdentityResult result =
+                        await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Manage");
+                    }
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "User not found");
+                }
+            }
+            return View(model);
+        }
+
     }
 }
