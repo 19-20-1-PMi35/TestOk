@@ -13,5 +13,7 @@ namespace TestOk.Models
 
         public int AverageMark;
         public int ForCertain;
+        public int CurrentSurveyID;
+        public int ToPass;
     }
 }

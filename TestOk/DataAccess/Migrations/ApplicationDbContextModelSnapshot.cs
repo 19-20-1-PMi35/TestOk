@@ -65,6 +65,15 @@ namespace DataAccess.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Faculty")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GradebookNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Group")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -124,11 +133,11 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Complexity")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Complexity")
+                        .HasColumnType("float");
 
-                    b.Property<decimal>("PointsPerCorrectAnswer")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("PointsPerCorrectAnswer")
+                        .HasColumnType("float");
 
                     b.Property<string>("Question")
                         .HasColumnType("nvarchar(max)");

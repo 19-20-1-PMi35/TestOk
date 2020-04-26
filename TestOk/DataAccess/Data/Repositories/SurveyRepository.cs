@@ -17,9 +17,7 @@ namespace DataAccess.Data.Repositories
         private readonly ITestRepository _testRepository;
         private readonly IQuizRepository _quizRepository;
 
-        public SurveyRepository(DbContextFactory dbContextFactory,
-            ITestRepository testRepository,
-            IQuizRepository quizRepository)
+        public SurveyRepository(DbContextFactory dbContextFactory, ITestRepository testRepository, IQuizRepository quizRepository)
         {
             _dbContextFactory = dbContextFactory;
             _testRepository = testRepository;

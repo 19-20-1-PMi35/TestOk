@@ -19,14 +19,25 @@ namespace TestOk.Controllers
             _testService = testService;
         }
 
-        public IActionResult GetCurrent()
+        public IActionResult GetCurrent(int surveyID = 1)
         {
             var average = _statisticsService.GetAverageMark();
 
-            //currently not working
-            //var forCertain = _statisticsService.GetMarkForTest(0);
-
-            return View(new StatisticsModel { AverageMark = average/*, ForCertain = forCertain*/ });
+            int forCertain = 0;
+            try
+            {
+                forCertain = _statisticsService.GetMarkForTest(surveyID);
+            }
+            catch
+            {
+                return View(new StatisticsModel { AverageMark = average, ForCertain = 0, CurrentSurveyID = surveyID });
+            }
+            return View(new StatisticsModel
+            {
+                AverageMark = average,
+                ForCertain = forCertain,
+                CurrentSurveyID = surveyID
+            });
         }
     }
 }

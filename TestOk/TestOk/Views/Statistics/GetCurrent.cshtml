@@ -4,19 +4,28 @@
     ViewData["Title"] = "Get marks";
 }
 
-<div class="form-group">
+<form class="table" method="post" action="GetCurrent">
+    <input type="hidden" value="" name="Survey" />
+    <table>
+        <tr class=" w-100">
+            <td class="form-text text-info ">Enter which SurveysID</td>
+            <td><input type="text" name="SurveyID" /></td>
+            <td><input class="btn btn-info" type="submit" value="Find" /></td>
+        </tr>
+    </table>
+</form>
 
+<div class=" container"></div>
+<div class="form-group row text-center">
     <h5 class="text-danger">Here will be displayed your score for certain test</h5>
     <div class="w-100">
-        <h3 class="text-success">@Model.ForCertain</h3>
+        @*if(@Model.ForCertain)*@
+        <h3 class="text-success float-left">@Model.CurrentSurveyID - SurveyID </h3>
+        <h3 class="text-success float-right">@Model.ForCertain - Score</h3>
     </div>
-    <h5 class="text-info">Here will be displayed your score for certain test</h5>
-
 </div>
-
-<div>
-
-    <h5>Here will be displayed average score </h5>
-    <h3 class="text-primary">@Model.AverageMark</h3>
-
+<div class="form-group row">
+    <div class="w-100">
+        <h5 class="text-info float-left">Here will be displayed average score : @Model.AverageMark</h5>
+    </div>
 </div>
