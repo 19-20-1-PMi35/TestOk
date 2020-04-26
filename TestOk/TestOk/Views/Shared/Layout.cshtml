@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - TestOk</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/home.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/mega-menu.css" />
     <link rel="stylesheet" type="text/css" href="~/css/survey.css" />
@@ -14,7 +15,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TestOk</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -54,17 +55,36 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    @{
+        bool isHomePage = @Html.ViewContext.HttpContext.Request.Path.Equals("/");
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - TestOk - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="@(isHomePage ? "": "container mt-3")">
+            <main role="main" class="@(isHomePage ? "": "pb-3")">
+                @RenderBody()
+            </main>
         </div>
-    </footer>
+    }
+
+<footer class="border-top footer text-muted row pt-3">
+    <div class="col-12 col-md-6 text-center">
+        &copy; 2020 - TestOk - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+    <div class="col-12 col-md-6 text-center d-flex flex-column">
+        <h6>Created By</h6>
+        <p>
+            Andriy Pasternak
+        </p>
+        <p>
+            Nazar Vivchar
+        </p>
+        <p>
+            Taras Bat
+        </p>
+        <p>
+            Yuriy Horoshko
+        </p>
+    </div>
+</footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
