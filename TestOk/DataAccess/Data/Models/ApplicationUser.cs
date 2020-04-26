@@ -8,5 +8,10 @@ namespace DataAccess.Data.Models
 
         public string Surname { get; set; }
 
+        public string Faculty { get; set; }
+
+        public string Group { get; set; }
+
+        public string GradebookNumber { get; set; }        
     }
 }
