@@ -1,0 +1,43 @@
+﻿@model StatisticsModel
+
+@{
+    ViewData["Title"] = "Get marks";
+}
+
+<form class="table" method="post" action="GetCurrent">
+    <table>
+        <tr class="">
+            <th class="form-text"><h4>Enter which SurveysID</h4></th>
+        </tr>
+        <tr class="">
+            <td><input type="text" name="SurveyID" /></td>
+        </tr>
+        <tr>
+            <td><input class="btn btn-primary" type="submit" value="Find" /></td>
+        </tr>
+    </table>
+</form>
+
+<div class="container">
+    <div class="form-group row">
+        <div class="w-100">
+            @if (Model.ToPass <= Model.ForCertain)
+            {
+                <h3 class="text-success text-center">
+                    Your score for test №@Model.CurrentSurveyID is @Model.ForCertain when minimum score to pass the test is @Model.ToPass
+                </h3>
+            }
+            else
+            {
+                <h3 class="text-danger text-center">
+                    Your score for test №@Model.CurrentSurveyID is @Model.ForCertain when minimum score to pass the test is @Model.ToPass
+                </h3>
+            }
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="w-100">
+            <h3 class="text-info text-center">Your average score : @Model.AverageMark</h3>
+        </div>
+    </div>
+</div>

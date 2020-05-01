@@ -113,7 +113,7 @@ namespace DataAccess.Data
                 Id = survey.Id,
                 Test = survey.Test.ConvertToDto(),
                 CurrentQuiz = survey.CurrentQuiz.ConvertToDto(),
-                CurrentQuizAnswers = ( answers != null && answers.Count != 0) ? answers.ConvertToDto() : new List<AnswerDto>(),
+                CurrentQuizAnswers = (answers != null && answers.Count != 0) ? answers.ConvertToDto() : new List<AnswerDto>(),
                 IsFinished = survey.IsFinished,
                 UserId = survey.UserId.GetValueOrDefault(),
                 Mark = survey.Mark

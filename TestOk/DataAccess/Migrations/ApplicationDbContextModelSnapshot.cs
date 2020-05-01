@@ -19,6 +19,33 @@ namespace DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("DataAccess.Data.Models.Answer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("QuizId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("QuizOptionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SurveyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuizId");
+
+                    b.HasIndex("QuizOptionId");
+
+                    b.HasIndex("SurveyId");
+
+                    b.ToTable("Answers");
+                });
+
             modelBuilder.Entity("DataAccess.Data.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -37,6 +64,15 @@ namespace DataAccess.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Faculty")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GradebookNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Group")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -97,11 +133,11 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Complexity")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Complexity")
+                        .HasColumnType("float");
 
-                    b.Property<decimal>("PointsPerCorrectAnswer")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("PointsPerCorrectAnswer")
+                        .HasColumnType("float");
 
                     b.Property<string>("Question")
                         .HasColumnType("nvarchar(max)");
@@ -139,6 +175,37 @@ namespace DataAccess.Migrations
                     b.HasIndex("QuizId1");
 
                     b.ToTable("QuizOptions");
+                });
+
+            modelBuilder.Entity("DataAccess.Data.Models.Survey", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CurrentQuizId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsFinished")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Mark")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TestId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CurrentQuizId");
+
+                    b.HasIndex("TestId");
+
+                    b.ToTable("Surveys");
                 });
 
             modelBuilder.Entity("DataAccess.Data.Models.Test", b =>
@@ -298,6 +365,21 @@ namespace DataAccess.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("DataAccess.Data.Models.Answer", b =>
+                {
+                    b.HasOne("DataAccess.Data.Models.Quiz", "Quiz")
+                        .WithMany()
+                        .HasForeignKey("QuizId");
+
+                    b.HasOne("DataAccess.Data.Models.QuizOption", "QuizOption")
+                        .WithMany()
+                        .HasForeignKey("QuizOptionId");
+
+                    b.HasOne("DataAccess.Data.Models.Survey", "Survey")
+                        .WithMany()
+                        .HasForeignKey("SurveyId");
+                });
+
             modelBuilder.Entity("DataAccess.Data.Models.Quiz", b =>
                 {
                     b.HasOne("DataAccess.Data.Models.Test", null)
@@ -314,6 +396,17 @@ namespace DataAccess.Migrations
                     b.HasOne("DataAccess.Data.Models.Quiz", null)
                         .WithMany("Options")
                         .HasForeignKey("QuizId1");
+                });
+
+            modelBuilder.Entity("DataAccess.Data.Models.Survey", b =>
+                {
+                    b.HasOne("DataAccess.Data.Models.Quiz", "CurrentQuiz")
+                        .WithMany()
+                        .HasForeignKey("CurrentQuizId");
+
+                    b.HasOne("DataAccess.Data.Models.Test", "Test")
+                        .WithMany()
+                        .HasForeignKey("TestId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
