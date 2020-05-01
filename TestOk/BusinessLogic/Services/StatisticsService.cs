@@ -11,7 +11,7 @@ namespace BusinessLogic.Services
     public class StatisticsService : IStatisticsService
     {
         private readonly ISurveyRepository _surveyRepository;
-            private readonly ITestRepository _testRepository;
+        private readonly ITestRepository _testRepository;
 
 
         public StatisticsService(ISurveyRepository surveyRepository, ITestRepository testRepository)
@@ -35,14 +35,14 @@ namespace BusinessLogic.Services
 
             return certainSurveys.Mark;
         }
-         
-        //public int GetMarkToPass(int surveyId)
-        //{
-        //    var surveys = _surveyRepository.FinishedSurveys(0);
-        //    var certainSurveys = surveys.Where(x => x.Id == surveyId).FirstOrDefault();
 
-        //    var tests=_testRepository.
-        //    return certainSurveys.;
-        //}
+        public int GetMarkToPass(int surveyId)
+        {
+            var surveys = _surveyRepository.FinishedSurveys(0);
+            var certainSurvey = surveys.Where(x => x.Id == surveyId).FirstOrDefault();
+            var tests = _testRepository.GetTestById(certainSurvey.Test.Id);
+
+            return tests.MaxGrade * tests.MinimumSuccessPercentage / 100;
+        }
     }
 }

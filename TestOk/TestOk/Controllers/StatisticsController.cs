@@ -22,21 +22,29 @@ namespace TestOk.Controllers
         public IActionResult GetCurrent(int surveyID = 1)
         {
             var average = _statisticsService.GetAverageMark();
-
+            int toPass = 0;
             int forCertain = 0;
             try
             {
                 forCertain = _statisticsService.GetMarkForTest(surveyID);
+                toPass = _statisticsService.GetMarkToPass(surveyID); 
             }
             catch
             {
-                return View(new StatisticsModel { AverageMark = average, ForCertain = 0, CurrentSurveyID = surveyID });
+                return View(new StatisticsModel
+                {
+                    AverageMark = average,
+                    ForCertain = 0,
+                    CurrentSurveyID = surveyID,
+                    ToPass = toPass
+                });
             }
             return View(new StatisticsModel
             {
                 AverageMark = average,
                 ForCertain = forCertain,
-                CurrentSurveyID = surveyID
+                CurrentSurveyID = surveyID,
+                ToPass = toPass
             });
         }
     }

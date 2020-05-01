@@ -11,5 +11,7 @@ namespace BusinessLogic.Services.Interfaces
         int GetAverageMark();
 
         int GetMarkForTest(int surveyId);
+
+        int GetMarkToPass(int surveyId);
     }
 }

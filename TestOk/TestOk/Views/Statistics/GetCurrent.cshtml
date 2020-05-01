@@ -5,27 +5,39 @@
 }
 
 <form class="table" method="post" action="GetCurrent">
-    <input type="hidden" value="" name="Survey" />
     <table>
-        <tr class=" w-100">
-            <td class="form-text text-info ">Enter which SurveysID</td>
+        <tr class="">
+            <th class="form-text"><h4>Enter which SurveysID</h4></th>
+        </tr>
+        <tr class="">
             <td><input type="text" name="SurveyID" /></td>
-            <td><input class="btn btn-info" type="submit" value="Find" /></td>
+        </tr>
+        <tr>
+            <td><input class="btn btn-primary" type="submit" value="Find" /></td>
         </tr>
     </table>
 </form>
 
-<div class=" container"></div>
-<div class="form-group row text-center">
-    <h5 class="text-danger">Here will be displayed your score for certain test</h5>
-    <div class="w-100">
-        @*if(@Model.ForCertain)*@
-        <h3 class="text-success float-left">@Model.CurrentSurveyID - SurveyID </h3>
-        <h3 class="text-success float-right">@Model.ForCertain - Score</h3>
+<div class="container">
+    <div class="form-group row">
+        <div class="w-100">
+            @if (Model.ToPass <= Model.ForCertain)
+            {
+                <h3 class="text-success text-center">
+                    Your score for test №@Model.CurrentSurveyID is @Model.ForCertain when minimum score to pass the test is @Model.ToPass
+                </h3>
+            }
+            else
+            {
+                <h3 class="text-danger text-center">
+                    Your score for test №@Model.CurrentSurveyID is @Model.ForCertain when minimum score to pass the test is @Model.ToPass
+                </h3>
+            }
+        </div>
     </div>
-</div>
-<div class="form-group row">
-    <div class="w-100">
-        <h5 class="text-info float-left">Here will be displayed average score : @Model.AverageMark</h5>
+    <div class="form-group row">
+        <div class="w-100">
+            <h3 class="text-info text-center">Your average score : @Model.AverageMark</h3>
+        </div>
     </div>
 </div>
