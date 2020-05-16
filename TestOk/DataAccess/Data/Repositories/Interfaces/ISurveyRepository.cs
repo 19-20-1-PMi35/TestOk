@@ -7,17 +7,17 @@ namespace DataAccess.Data.Repositories.Interfaces
 {
     public interface ISurveyRepository
     {
-        Task<SurveyDto> StartSurvey(int userId, int testId);
+        Task<SurveyDto> StartSurvey(string userId, int testId);
 
-        Task<SurveyDto> GetActiveSurvey(int userId);
+        Task<SurveyDto> GetActiveSurvey(string userId);
 
         Task UpdateAnswer(int quizId, int optionId, int surveyId, bool isOneAnswer);
 
         Task<List<Answer>> GetAnswersByQuiz(int quizId, int surveyId);
 
-        Task<SurveyDto> SwitchQuiz(int quizId, int userId);
+        Task<SurveyDto> SwitchQuiz(int quizId, string userId);
 
-        List<SurveyDto> FinishedSurveys(int userId);
+        List<SurveyDto> FinishedSurveys(string userId);
 
         Task FinishSurvey(int surveyId, double mark);
     }

@@ -25,16 +25,16 @@ namespace BusinessLogic.Services
             _quizRepository = quizRepository;
         }
 
-        public async Task<SurveyDto> StartSurvey(int testId)
+        public async Task<SurveyDto> StartSurvey(int testId, string userId)
         {
             //change user id to not hardcoded later :)
-            return await _surveyRepository.StartSurvey(0, testId);
+            return await _surveyRepository.StartSurvey(userId, testId);
         }
 
-        public async Task<SurveyDto> GetSurvey()
+        public async Task<SurveyDto> GetSurvey(string userId)
         {
             //change user id to not hardcoded later :)
-            return await _surveyRepository.GetActiveSurvey(0);
+            return await _surveyRepository.GetActiveSurvey(userId);
         }
 
         public async Task ChooseAnswer(int quizId, int optionId, int surveyId)
@@ -44,15 +44,15 @@ namespace BusinessLogic.Services
             await _surveyRepository.UpdateAnswer(quizId, optionId, surveyId, isOneAnswer);
         }
 
-        public async Task<SurveyDto> SwitchQuiz(int quizId)
+        public async Task<SurveyDto> SwitchQuiz(int quizId, string userId)
         {
             //change user id to not hardcoded later :)
-            return await _surveyRepository.SwitchQuiz(quizId, 0);
+            return await _surveyRepository.SwitchQuiz(quizId, userId);
         }
 
-        public async Task FinishSurvey()
+        public async Task FinishSurvey(string userId)
         {
-            var survey = await _surveyRepository.GetActiveSurvey(0);
+            var survey = await _surveyRepository.GetActiveSurvey(userId);
             if (survey == null)
                 return;
 
@@ -64,25 +64,27 @@ namespace BusinessLogic.Services
             {
                 var answers = await _surveyRepository.GetAnswersByQuiz(quiz.Id, survey.Id);
 
-                if (IsCorrectAnswers(quiz.CorrectAnswers, answers))
-                {
-                    mark += quiz.PointsPerCorrectAnswer;
-                }
+                var markForQuiz = GetNumberOfCorrectAnswers(quiz.CorrectAnswers, answers);
+
+                mark += markForQuiz > 0
+                    ? markForQuiz * quiz.PointsPerCorrectAnswer
+                    : 0;
             }
 
             await _surveyRepository.FinishSurvey(survey.Id, mark);
         }
 
-        private bool IsCorrectAnswers(List<QuizOption> correctAnswers, List<Answer> chosenAnswers)
+        private int GetNumberOfCorrectAnswers(List<QuizOption> correctAnswers, List<Answer> chosenAnswers)
         {
-            var correctIds = correctAnswers.Select(q => q.Id).ToList();
+            var correctAnswerStrings = correctAnswers.Select(q => q.Text).ToList();
 
-            var chosenIds = chosenAnswers.Select(q => q.QuizOption.Id).ToList();
+            var chosenAnswerStrings = chosenAnswers.Select(q => q.QuizOption.Text).ToList();
 
-            var firstNotSecond = correctIds.Except(chosenIds);
-            var secondNotFirst = chosenIds.Except(correctIds);
+            var correctAnswersNumber = chosenAnswerStrings.Count(chosen => correctAnswerStrings.Contains(chosen));
+            var notCorrectAnswersNumber =
+                chosenAnswerStrings.Count(chosen => correctAnswerStrings.All(correct => chosen != correct));
 
-            return !firstNotSecond.Any() && !secondNotFirst.Any();
+            return correctAnswersNumber - notCorrectAnswersNumber;
         }
     }
 }
