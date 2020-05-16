@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 using TestOk.Models;
 
 namespace TestOk.Controllers
@@ -21,13 +22,15 @@ namespace TestOk.Controllers
 
         public IActionResult GetCurrent(int surveyID = 1)
         {
-            var average = _statisticsService.GetAverageMark();
+            var userId = User.Identity.GetUserId();
+
+            var average = _statisticsService.GetAverageMark(userId);
             int toPass = 0;
             int forCertain = 0;
             try
             {
-                forCertain = _statisticsService.GetMarkForTest(surveyID);
-                toPass = _statisticsService.GetMarkToPass(surveyID); 
+                forCertain = _statisticsService.GetMarkForTest(surveyID, userId);
+                toPass = _statisticsService.GetMarkToPass(surveyID, userId); 
             }
             catch
             {

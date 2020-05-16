@@ -10,7 +10,7 @@ namespace DataAccess.Data.DTO
     {
         public int Id { get; set; }
 
-        public int UserId { get; set; } = 1;
+        public string UserId { get; set; } = "1";
 
         public QuizDto CurrentQuiz { get; set; }
 

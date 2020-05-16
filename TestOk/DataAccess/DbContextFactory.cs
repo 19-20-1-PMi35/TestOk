@@ -10,9 +10,7 @@ namespace DataAccess
     {
         public ApplicationDbContext GetDbContext()
         {
-            var dbOptions = GetOptions();
-
-            return new ApplicationDbContext(dbOptions);
+            return new ApplicationDbContext(GetOptions());
         }
 
         private DbContextOptions GetOptions()
@@ -22,19 +20,15 @@ namespace DataAccess
 
         private string GetConnectionString()
         {
-            var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__default");
-
-            return connectionString ?? GetConnectionStringFromAppSetting();
+            return Environment.GetEnvironmentVariable("ConnectionStrings__default") ?? GetConnectionStringFromAppSetting();
         }
 
         private string GetConnectionStringFromAppSetting()
         {
             var configurationBuilder = new ConfigurationBuilder();
-            var path = Path.Combine(Environment.CurrentDirectory, "appsettings.json");
-            configurationBuilder.AddJsonFile(path, false);
+            configurationBuilder.AddJsonFile(Path.Combine(Environment.CurrentDirectory, "appsettings.json"), false);
 
-            var root = configurationBuilder.Build();
-            return root.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value;
+            return configurationBuilder.Build().GetSection("ConnectionStrings").GetSection("DefaultConnection").Value;
         }
     }
 }

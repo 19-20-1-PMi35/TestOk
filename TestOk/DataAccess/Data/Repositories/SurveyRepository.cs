@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Data.DTO;
@@ -24,7 +23,7 @@ namespace DataAccess.Data.Repositories
             _quizRepository = quizRepository;
         }
 
-        public async Task<SurveyDto> GetActiveSurvey(int userId)
+        public async Task<SurveyDto> GetActiveSurvey(string userId)
         {
             try
             {
@@ -44,7 +43,7 @@ namespace DataAccess.Data.Repositories
             }
         }
 
-        public async Task<SurveyDto> StartSurvey(int userId, int testId)
+        public async Task<SurveyDto> StartSurvey(string userId, int testId)
         {
             try
             {
@@ -119,7 +118,7 @@ namespace DataAccess.Data.Repositories
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<SurveyDto> SwitchQuiz(int quizId, int userId)
+        public async Task<SurveyDto> SwitchQuiz(int quizId, string userId)
         {
             await using var dbContext = _dbContextFactory.GetDbContext();
             var surveyId = GetSurveyByUserId(userId, dbContext).Select(s => new { s.Id, s.IsFinished })
@@ -144,7 +143,7 @@ namespace DataAccess.Data.Repositories
             await dbContext.SaveChangesAsync();
         }
 
-        public List<SurveyDto> FinishedSurveys(int userId)
+        public List<SurveyDto> FinishedSurveys(string userId)
         {
             using var dbContext = _dbContextFactory.GetDbContext();
 
@@ -153,7 +152,7 @@ namespace DataAccess.Data.Repositories
             return surveys.Select(x => x.ConvertToDto(new List<Answer>())).ToList();
         }
 
-        private IEnumerable<Survey> GetSurveyByUserId(int userId, ApplicationDbContext dbContext)
+        private IEnumerable<Survey> GetSurveyByUserId(string userId, ApplicationDbContext dbContext)
         {
             return dbContext.Surveys.Select(s => new Survey
             {

@@ -101,7 +101,7 @@ namespace DataAccess.Data
                 CurrentQuiz = quiz.ConvertToDto(),
                 CurrentQuizAnswers = answers.ConvertToDto(),
                 IsFinished = survey.IsFinished,
-                UserId = survey.UserId.GetValueOrDefault(),
+                UserId = survey.UserId,
                 Mark = survey.Mark
             };
         }
@@ -115,7 +115,7 @@ namespace DataAccess.Data
                 CurrentQuiz = survey.CurrentQuiz.ConvertToDto(),
                 CurrentQuizAnswers = (answers != null && answers.Count != 0) ? answers.ConvertToDto() : new List<AnswerDto>(),
                 IsFinished = survey.IsFinished,
-                UserId = survey.UserId.GetValueOrDefault(),
+                UserId = survey.UserId,
                 Mark = survey.Mark
             };
         }

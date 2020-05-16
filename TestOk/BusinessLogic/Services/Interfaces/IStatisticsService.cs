@@ -8,10 +8,10 @@ namespace BusinessLogic.Services.Interfaces
 {
     public interface IStatisticsService
     {
-        int GetAverageMark();
+        int GetAverageMark(string userId);
 
-        int GetMarkForTest(int surveyId);
+        int GetMarkForTest(int surveyId, string userId);
 
-        int GetMarkToPass(int surveyId);
+        int GetMarkToPass(int surveyId, string userId);
     }
 }
